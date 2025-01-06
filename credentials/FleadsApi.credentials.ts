@@ -4,8 +4,8 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class FourLeadsApi implements ICredentialType {
-	name = 'FourLeadsApi';
+export class FleadsApi implements ICredentialType {
+	name = 'FleadsApi';
 	displayName = '4leads API';
 	// Uses the link to this tutorial as an example
 	// Replace with your own docs links when building your own nodes
@@ -15,15 +15,16 @@ export class FourLeadsApi implements ICredentialType {
 			displayName: 'API Key',
 			name: 'apiKey',
 			type: 'string',
+			typeOptions: { password: true },
 			default: '',
 		},
 	];
-	authenticate = {
+	authenticate: IAuthenticateGeneric = {
 		type: 'generic',
 		properties: {
 			qs: {
 				'api_key': '={{$credentials.apiKey}}'
 			}
 		},
-	} as IAuthenticateGeneric;
+	};
 }
