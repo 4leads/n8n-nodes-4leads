@@ -1,7 +1,9 @@
-import { IExecuteFunctions } from 'n8n-workflow';
-import { INodeType, INodeTypeDescription, INodeExecutionData, NodeConnectionType, INode } from 'n8n-workflow';
-import { tagOperations, tagFields } from './labels/tagsLabel';
+import { INodeType, INodeTypeDescription, INodeExecutionData } from 'n8n-workflow';
+import { IExecuteFunctions, NodeConnectionType } from 'n8n-workflow';
+import { tagFields, tagOperations } from './labels/tagsLabel';
 import { contactFields, contactOperations } from './labels/contactsLabel';
+import { globalFieldFields, globalFieldOperations } from './labels/globalFieldsLabel';
+import { makeRequest } from './GenericFunctions';
 
 export class Fleads implements INodeType {
 	description: INodeTypeDescription = {
@@ -46,6 +48,10 @@ export class Fleads implements INodeType {
 						name: 'Contact',
 						value: 'contact',
 					},
+                    {
+                        name: 'Global Field',
+                        value: 'globalField'
+                    }
 				],
 				default: 'tag',
 				description: 'The resource to operate on. ',
@@ -57,34 +63,49 @@ export class Fleads implements INodeType {
 			// Contacts
 			...contactOperations,
 			...contactFields,
+            // Global fields
+            ...globalFieldOperations,
+            ...globalFieldFields,
 		]
 	};
 
-	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		const items = this.getInputData;
-		const length = (items.length as unknown) as number;
-
+    async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+		//todo: remove
+		const testNodeExecutionData: INodeExecutionData = {
+			json: {
+				key: "testing"
+			}
+		};
+		//todo: remove
+		const testData = [testNodeExecutionData];
+	
+		const items = this.getInputData();
+		const length = items.length as number;
+	
 		const resource = this.getNodeParameter('resource', 0) as string;
 		const operation = this.getNodeParameter('operation', 0) as string;
-
+	
 		for (let i = 0; i < length; i++) {
 			try {
 				if (resource === 'tag') {
-					console.log("tag resource")
+					console.log("tag resource");
 					if (operation === 'create') {
-						console.log("tag create")
+						console.log("tag create");
+						const responseData = await makeRequest.call(this, 'POST', 'tags', 'bla');
+						console.log(responseData);
 					} else if (operation === 'delete') {
-						console.log("tag delete")
+						console.log("tag delete");
 					} else if (operation === 'get') {
-						console.log("tag get")
+						console.log("tag get");
 					} else if (operation === 'getAll') {
-						console.log("tag getAll")
+						console.log("tag getAll");
 					}
 				}
 			} catch (error) {
-				console.log("Fleads node ts");
-				console.log(error);
+				throw error;
 			}
 		}
+	
+		return [testData]; //todo: remove
 	}
 }
