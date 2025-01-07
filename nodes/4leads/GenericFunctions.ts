@@ -47,8 +47,8 @@ export async function makeRequest(
     }
 
     if(Object.keys(responseData as IDataObject).length !== 0) {
-		return responseData;
+        return responseData;
 	} else {
-		return { 'success': true };
+        return { 'success': true };
 	}
 }
