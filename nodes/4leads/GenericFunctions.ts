@@ -1,11 +1,12 @@
 import { IDataObject, IExecuteFunctions, IExecuteSingleFunctions, IHttpRequestMethods, ILoadOptionsFunctions, IRequestOptions, NodeApiError, NodeOperationError } from "n8n-workflow";
 
-export async function makeRequest(
-    this: IExecuteFunctions | IExecuteSingleFunctions | ILoadOptionsFunctions, 
-    method: IHttpRequestMethods, 
-    endpoint: string, 
-    body: any, 
-    uri?: string, 
+export async function fourLeadsApiRequest(
+    this: IExecuteFunctions | IExecuteSingleFunctions | ILoadOptionsFunctions,
+    method: IHttpRequestMethods,
+    endpoint: string,
+    body: any = {},
+    qs: IDataObject = {},
+    uri?: string,
     option: IDataObject = {}
 ): Promise<any> {
     let options: IRequestOptions = {
@@ -15,6 +16,7 @@ export async function makeRequest(
         },
         method,
         body,
+        qs,
         uri: uri || `https://api.4leads.eu/v1/${endpoint}`,
         json: true,
     };
@@ -41,14 +43,15 @@ export async function makeRequest(
         };
 
         responseData = await this.helpers.request(options);
+        console.log(responseData)
 
     } catch (error) {
         throw new NodeApiError(this.getNode(), error);
     }
 
-    if(Object.keys(responseData as IDataObject).length !== 0) {
+    if (Object.keys(responseData as IDataObject).length !== 0) {
         return responseData;
-	} else {
+    } else {
         return { 'success': true };
-	}
+    }
 }

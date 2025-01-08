@@ -15,22 +15,27 @@ export const tagOperations: INodeProperties[] = [
 			{
 				name: 'Create',
 				value: 'create',
-				action: 'Create a tag',
+				action: 'Create a New Tag',
+			},
+			{
+				name: 'Update',
+				value: 'update',
+				action: 'Update a Tag',
 			},
 			{
 				name: 'Delete',
 				value: 'delete',
-				action: 'Delete a tag',
+				action: 'Delete a Tag',
 			},
 			{
 				name: 'Get',
 				value: 'get',
-				action: 'Get a tag',
+				action: 'List Tags',
 			},
 			{
 				name: 'Get all',
 				value: 'getAll',
-				action: 'Get all tags',
+				action: 'Get all tags (todo remove and add to get)',
 			},
 		],
 		default: 'create',
@@ -38,9 +43,12 @@ export const tagOperations: INodeProperties[] = [
 ];
 
 export const tagFields: INodeProperties[] = [
+	// ----------------------------------------
+    //             tag: create
+    // ----------------------------------------
 	{
 		displayName: 'Name',
-		name: 'name',
+		name: 'tagName',
 		type: 'string',
 		default: '',
 		required: true,
@@ -53,48 +61,100 @@ export const tagFields: INodeProperties[] = [
 		placeholder: 'Tag name',
 		description: 'The name of the tag',
 	},
+	// ----------------------------------------
+    //             tag: update, get, delete
+    // ----------------------------------------
 	{
 		displayName: 'Tag ID',
 		name: 'tagId',
-		type: 'string',
+		type: 'number',
 		default: '',
 		required: true,
 		displayOptions: {
 			show: {
 				resource: ['tag'],
-				operation: ['get', 'delete'],
+				operation: ['update', 'get', 'delete'],
 			},
 		},
 		description: 'The ID of the tag',
 	},
+	// ----------------------------------------
+    //             tag: getAll
+    // ----------------------------------------
 	{
-		displayName: 'Return All',
-		name: 'returnAll',
-		type: 'boolean',
+		displayName: 'Additional Fields',
+		name: 'tagQs',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
 		displayOptions: {
 			show: {
-				operation: ['getAll'],
-				resource: ['tag'],
+				resource: [
+					'tag',
+				],
+				operation: [
+					'getAll',
+				],
 			},
 		},
-		default: false,
-		description: 'Whether to return all results or only up to a given limit',
+		options: [
+			{
+				displayName: 'Search string',
+				name: 'tagSearchString',
+				type: 'string',
+				default: '',
+				description: 'This parameter is used to specify the text you want to search for within the name fields. For example, if you\'re looking for names containing "@muster.de", you would enter this value in the searchString parameter.',
+			},
+			{
+				displayName: 'Page size',
+				name: 'tagPageSize',
+				type: 'string',
+				default: '',
+				description: 'This parameter defines the number of results to display per page. You can specify values like 5, 10, 20, 50, or 200, depending on how many results you want to be shown per page in the response.',
+			},
+			{
+				displayName: 'Page number',
+				name: 'tagPageNum',
+				type: 'string',
+				default: '',
+				description: 'This parameter is used to indicate the page number you want to retrieve in the result set. For example, if you want the first set of results, you would set this value to 1. If you want the second set, set it to 2, and so on.',
+			},
+		],
 	},
+	// ----------------------------------------
+    //             tag: update
+    // ----------------------------------------
 	{
-		displayName: 'Limit',
-		name: 'limit',
-		type: 'number',
+		displayName: 'Additional Fields',
+		name: 'tagUpdateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
 		displayOptions: {
 			show: {
-				operation: ['getAll'],
-				resource: ['tag'],
-				returnAll: [false],
+				resource: [
+					'tag',
+				],
+				operation: [
+					'update',
+				],
 			},
 		},
-		typeOptions: {
-			minValue: 1
-		},
-		default: 50,
-		description: 'Max number of results to return',
+		options: [
+			{
+				displayName: 'Name',
+				name: 'updatedTagName',
+				type: 'string',
+				default: '',
+				description: 'Select the name for the tag.',
+			},
+			{
+				displayName: 'Description',
+				name: 'updatedTagDescription',
+				type: 'string',
+				default: '',
+				description: 'Select the description for the tag.',
+			},
+		],
 	},
 ];
