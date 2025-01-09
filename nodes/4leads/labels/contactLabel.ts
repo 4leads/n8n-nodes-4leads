@@ -276,19 +276,14 @@ export const contactOperations: INodeProperties[] = [
                 action: 'List Contact',
             },
             {
-                name: 'Get all',
-                value: 'getAll',
-                action: 'Get all contacts (todo remove and add to get)',
-            },
-            {
                 name: 'Add a Tag',
                 value: 'addATag',
-                action: 'Add a (list) of tags',
+                action: 'Add tags',
             },
             {
                 name: 'Remove a Tag',
                 value: 'removeATag',
-                action: 'Remove a (list) of tags',
+                action: 'Remove tags',
             },
             {
                 name: 'Get tag list',
@@ -372,8 +367,8 @@ export const contactFields: INodeProperties[] = [
     },
     // ----------------------------------------
     //        contact: update, get, delete, 
-    //     getContactTagList, getContactFieldList,
-    //     addATag, removeATag
+    //        getContactTagList, getContactFieldList,
+    //        addATag, removeATag
     // ----------------------------------------
     {
         displayName: 'Contact ID',
@@ -384,7 +379,7 @@ export const contactFields: INodeProperties[] = [
         displayOptions: {
             show: {
                 resource: ['contact'],
-                operation: ['update', 'get', 'delete',
+                operation: ['update', 'delete',
                     'addATag', 'removeATag',
                     'getContactTagList', 'getContactFieldList'],
             },
@@ -681,8 +676,36 @@ export const contactFields: INodeProperties[] = [
         ],
     },
     // ----------------------------------------
-    //             contact: getAll
+    //             contact: get
     // ----------------------------------------
+    {
+        displayName: 'Contact ID',
+        name: 'contactId',
+        type: 'number',
+        default: '',
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['contact'],
+                operation: ['get'],
+                bReturnAll: [false]
+            },
+        },
+        description: 'The ID of the contact',
+    },
+    {
+        displayName: 'Return everything',
+        name: 'bReturnAll',
+        type: 'boolean',
+        displayOptions: {
+            show: {
+                operation: ['get'],
+                resource: ['contact'],
+            },
+        },
+        default: false,
+        description: 'Enable this option to return everything.',
+    },
     {
         displayName: 'Additional Fields',
         name: 'contactQs',
@@ -695,8 +718,9 @@ export const contactFields: INodeProperties[] = [
                     'contact',
                 ],
                 operation: [
-                    'getAll',
+                    'get',
                 ],
+                bReturnAll: [true],
             },
         },
         options: [

@@ -32,11 +32,6 @@ export const tagOperations: INodeProperties[] = [
 				value: 'get',
 				action: 'List Tags',
 			},
-			{
-				name: 'Get all',
-				value: 'getAll',
-				action: 'Get all tags (todo remove and add to get)',
-			},
 		],
 		default: 'create',
 	},
@@ -73,14 +68,42 @@ export const tagFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['tag'],
-				operation: ['update', 'get', 'delete'],
+				operation: ['update', 'delete'],
 			},
 		},
 		description: 'The ID of the tag',
 	},
 	// ----------------------------------------
-    //             tag: getAll
+    //             tag: get
     // ----------------------------------------
+    {
+        displayName: 'Return everything',
+        name: 'bReturnAll',
+        type: 'boolean',
+        displayOptions: {
+            show: {
+                operation: ['get'],
+                resource: ['tag'],
+            },
+        },
+        default: false,
+        description: 'Enable this option to return everything.',
+    },
+	{
+		displayName: 'Tag ID',
+		name: 'tagId',
+		type: 'number',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['tag'],
+				operation: ['get'],
+				bReturnAll: [false]
+			},
+		},
+		description: 'The ID of the tag',
+	},
 	{
 		displayName: 'Additional Fields',
 		name: 'tagQs',
@@ -93,8 +116,9 @@ export const tagFields: INodeProperties[] = [
 					'tag',
 				],
 				operation: [
-					'getAll',
+					'get',
 				],
+				bReturnAll: [true]
 			},
 		},
 		options: [
