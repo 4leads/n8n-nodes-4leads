@@ -49,6 +49,126 @@ export const globalFieldOperations: INodeProperties[] = [
 
 export const globalFieldFields: INodeProperties[] = [
     {
+        displayName: 'Name',
+        name: 'globalFieldName',
+        type: 'string',
+        displayOptions: {
+            show: {
+                operation: ['create'],
+                resource: ['globalField'],
+            },
+        },
+        default: '',
+        required: true,
+        description: 'Choose a name for this globalField.',
+    },
+    {
+        displayName: 'Priority',
+        name: 'globalFieldPrio',
+        type: 'options',
+        default: '0',
+        description: 'Select the priority for this global field.',
+        displayOptions: {
+            show: {
+                operation: ['create', 'update'],
+                resource: ['globalField'],
+            },
+        },
+        options: [
+            {
+                name: '0 (highest)',
+                value: '0',
+            },
+            {
+                name: '1',
+                value: '1',
+            },
+            {
+                name: '2',
+                value: '2',
+            },
+            {
+                name: '3',
+                value: '3',
+            },
+            {
+                name: '4',
+                value: '4',
+            },
+            {
+                name: '5',
+                value: '5',
+            },
+            {
+                name: '6',
+                value: '6',
+            },
+            {
+                name: '7',
+                value: '7',
+            },
+            {
+                name: '8',
+                value: '8',
+            },
+            {
+                name: '9',
+                value: '9',
+            },
+            {
+                name: '10 (lowest)',
+                value: '10',
+            },
+        ],
+    },
+    {
+        displayName: 'Field Type',
+        name: 'fieldtypeId',
+        type: 'options',
+        default: 'text',
+        description: 'Select the type of the field.',
+        displayOptions: {
+            show: {
+                operation: ['create', 'update'],
+                resource: ['globalField'],
+            },
+        },
+        options: [
+            {
+                name: 'Datetime',
+                value: 'datetime'
+            },
+            {
+                name: 'Text',
+                value: 'text'
+            },
+            {
+                name: 'Checkbox',
+                value: 'checkbox'
+            },
+            {
+                name: 'Numeric',
+                value: 'numeric'
+            },
+            {
+                name: 'Numeric Sum',
+                value: 'numericsum'
+            },
+            {
+                name: 'Textarea',
+                value: 'textarea'
+            },
+            {
+                name: 'Radio',
+                value: 'radio'
+            },
+            {
+                name: 'Select',
+                value: 'select'
+            }
+        ]
+    },
+    {
         displayName: 'Return everything',
         name: 'bReturnAll',
         type: 'boolean',
@@ -62,6 +182,33 @@ export const globalFieldFields: INodeProperties[] = [
         description: 'Enable this option to return everything.',
     },
     {
+        displayName: 'Set Multiple Fields',
+        name: 'bSetMultiFields',
+        type: 'boolean',
+        default: false,
+        displayOptions: {
+            show: {
+                resource: ['globalField'],
+                operation: ['setValue'],
+            },
+        },
+        description: 'Enable this option to set multiple fields at once.',
+    },
+    {
+        displayName: 'Contact ID',
+        name: 'globalFieldContactId',
+        type: 'number',
+        default: '',
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['globalField'],
+                operation: ['getValue', 'setValue'],
+            },
+        },
+        description: 'The ID of the contact',
+    },
+    {
         displayName: 'Global field ID',
         name: 'globalFieldId',
         type: 'number',
@@ -70,7 +217,22 @@ export const globalFieldFields: INodeProperties[] = [
         displayOptions: {
             show: {
                 resource: ['globalField'],
-                operation: ['update', 'delete', 'getValue', 'setValue'],
+                operation: ['update', 'delete', 'getValue'],
+            },
+        },
+        description: 'The ID of the global field',
+    },
+    {
+        displayName: 'Global field ID',
+        name: 'globalFieldId',
+        type: 'number',
+        default: '',
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['globalField'],
+                operation: ['setValue'],
+                bSetMultiFields: [false],
             },
         },
         description: 'The ID of the global field',
@@ -91,33 +253,57 @@ export const globalFieldFields: INodeProperties[] = [
         description: 'The ID of the global field',
     },
     {
-        displayName: 'Contact ID',
-        name: 'globalFieldContactId',
-        type: 'number',
-        default: '',
-        required: true,
+        displayName: 'Fields to Set (max. 20)',
+        name: 'fieldsToSet',
+        type: 'fixedCollection',
+        placeholder: 'Add Field',
+        default: {},
+        typeOptions: {
+            multipleValues: true,
+        },
         displayOptions: {
             show: {
-                resource: ['globalField'],
-                operation: ['getValue', 'setValue'],
+                bSetMultiFields: [true],
             },
         },
-        description: 'The ID of the contact',
+        options: [
+            {
+                name: 'field',
+                displayName: 'Field',
+                values: [
+                    {
+                        displayName: 'Global Field ID',
+                        name: 'globalFieldId',
+                        type: 'number',
+                        default: '',
+                        description: 'The ID of the global field.',
+                    },
+                    {
+                        displayName: 'Value',
+                        name: 'value',
+                        type: 'string',
+                        default: '',
+                        description: 'The value to set for this field.',
+                    },
+                    {
+                        displayName: 'Do Triggers',
+                        name: 'doTriggers',
+                        type: 'boolean',
+                        default: false,
+                        description: 'Enable or disable triggers for this field.',
+                    },
+                    {
+                        displayName: 'Overwrite',
+                        name: 'overwrite',
+                        type: 'boolean',
+                        default: false,
+                        description: 'Enable or disable overwriting existing values.',
+                    },
+                ],
+            },
+        ],
     },
     {
-        displayName: 'Return everything',
-        name: 'bReturnAll',
-        type: 'boolean',
-        displayOptions: {
-            show: {
-                operation: ['get'],
-                resource: ['globalField'],
-            },
-        },
-        default: false,
-        description: 'Enable this option to return everything.',
-    },
-        {
         displayName: 'Value',
         name: 'globalFieldValue',
         type: 'string',
@@ -127,6 +313,7 @@ export const globalFieldFields: INodeProperties[] = [
             show: {
                 resource: ['globalField'],
                 operation: ['setValue'],
+                bSetMultiFields: [false],
             },
         },
         description: 'The value',
@@ -141,6 +328,7 @@ export const globalFieldFields: INodeProperties[] = [
             show: {
                 operation: ['setValue'],
                 resource: ['globalField'],
+                bSetMultiFields: [false],
             },
         },
         description: 'If false, no automatic process will be triggered which normally listens to a value change.',
@@ -155,6 +343,7 @@ export const globalFieldFields: INodeProperties[] = [
             show: {
                 operation: ['setValue'],
                 resource: ['globalField'],
+                bSetMultiFields: [false],
             },
         },
         description: 'If false, an already present value won’t be overwritten.',

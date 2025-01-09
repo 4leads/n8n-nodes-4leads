@@ -12,6 +12,8 @@ import { contactHandler } from './handlers/contactHandler';
 import { optinHandler } from './handlers/optinHandler'; 
 import { campaignHandler } from './handlers/campaignHandler';
 import { globalFieldHandler } from './handlers/globalFieldHandler';
+import { optInCaseHandler } from './handlers/optInCaseHandler';
+import { optInCasesFields, optInCasesOperations } from './labels/optInCasesLabel';
 
 export class Fleads implements INodeType {
 	description: INodeTypeDescription = {
@@ -67,6 +69,10 @@ export class Fleads implements INodeType {
 					{
 						name: 'Global Field',
 						value: 'globalField'
+					},
+					{
+						name: 'Opt-in-cases',
+						value: 'optInCases'
 					}
 				],
 				default: 'tag',
@@ -79,7 +85,7 @@ export class Fleads implements INodeType {
 			// Tags
 			...tagOperations,
 			...tagFields,
-			// Opt-in
+			// Opt-ins
 			...optinOperations,
 			...optinFields,
 			// Campaigns
@@ -88,6 +94,9 @@ export class Fleads implements INodeType {
 			// Global fields
 			...globalFieldOperations,
 			...globalFieldFields,
+			// Opt-in-cases
+			...optInCasesOperations,
+			...optInCasesFields,
 		]
 	};
 
@@ -114,6 +123,8 @@ export class Fleads implements INodeType {
 					responseData = await campaignHandler.call(this, operation, i, qs);
 				} else if (resource === 'globalField') {
 					responseData = await globalFieldHandler.call(this, operation, i, qs);
+				} else if (resource === 'optInCases') {
+					responseData = await optInCaseHandler.call(this, operation, i, qs);
 				}
 	
 				if (Array.isArray(responseData)) {

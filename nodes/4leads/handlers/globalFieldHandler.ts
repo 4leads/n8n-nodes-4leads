@@ -53,24 +53,53 @@ export async function globalFieldHandler(
         responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${globalFieldId}/getValue`, undefined, qs);
 
     } else if (operation === 'setValue') {
-
-        const globalFieldId = this.getNodeParameter('globalFieldId', i) as number;
+        const bSetMultiFields = this.getNodeParameter('bSetMultiFields', i) as boolean;
         const globalFieldContactId = this.getNodeParameter('globalFieldContactId', i) as number;
-        const globalFieldValue = this.getNodeParameter('globalFieldValue', i) as string;
+    
+        let body;
+    
+        if (bSetMultiFields) {
+            let fields = this.getNodeParameter('fieldsToSet', i) as Object;
+    
+            if (fields && !Array.isArray(fields)) {
+                fields = Object.values(fields);
+            }
+    
+            if (!Array.isArray(fields)) {
+                throw new Error('The "fieldsToSet" parameter is not an array or object with values!');
+            }
+    
+            const flatFields = fields.flat();
 
-        const globalFieldDoTrigger = this.getNodeParameter('bDoTriggers', i) as boolean;
-        const globalFieldOverwrite = this.getNodeParameter('bOverwrite', i) as boolean;
+    
+            body = {
+                contactId: globalFieldContactId,
+                fields: flatFields.map((field: any) => ({
+                    globalFieldId: field.globalFieldId,
+                    value: field.value,
+                    doTriggers: field.doTriggers,
+                    overwrite: field.overwrite,
+                })),
+            };
+    
+            responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/setFieldList`, body);
 
-
-        const body = {
-            contactId: globalFieldContactId,
-            value: globalFieldValue,
-            doTriggers: globalFieldDoTrigger,
-            overwrite: globalFieldOverwrite,
-        };
-
-        responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${globalFieldId}/setValue`, body);
-
+        } else {
+            const globalFieldId = this.getNodeParameter('globalFieldId', i) as number;
+            const globalFieldValue = this.getNodeParameter('globalFieldValue', i) as string;
+            const globalFieldDoTrigger = this.getNodeParameter('bDoTriggers', i) as boolean;
+            const globalFieldOverwrite = this.getNodeParameter('bOverwrite', i) as boolean;
+    
+            body = {
+                contactId: globalFieldContactId,
+                value: globalFieldValue,
+                doTriggers: globalFieldDoTrigger,
+                overwrite: globalFieldOverwrite,
+            };
+    
+            responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${globalFieldId}/setValue`, body);
+        }
+        
     } else {
         throw new Error(`Operation "${operation}" is not supported for resource "globalField".`);
     }
