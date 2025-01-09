@@ -15,6 +15,11 @@ export async function globalFieldHandler(
         // TODO
         responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/`)
 
+    } else if (operation === 'update') {
+
+        // TODO
+        responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/`)
+
     } else if (operation === 'delete') {
 
         const globalFieldId = this.getNodeParameter('globalFieldId', i) as number;
@@ -37,6 +42,34 @@ export async function globalFieldHandler(
             const globalFieldId = this.getNodeParameter('globalFieldId', i) as number;
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${globalFieldId}`, undefined, qs);
         }
+
+    } else if (operation === 'getValue') {
+
+        const globalFieldId = this.getNodeParameter('globalFieldId', i) as number;
+        const globalFieldContactId = this.getNodeParameter('globalFieldContactId', i) as number;
+
+        const qs = { contactId: globalFieldContactId };
+
+        responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${globalFieldId}/getValue`, undefined, qs);
+
+    } else if (operation === 'setValue') {
+
+        const globalFieldId = this.getNodeParameter('globalFieldId', i) as number;
+        const globalFieldContactId = this.getNodeParameter('globalFieldContactId', i) as number;
+        const globalFieldValue = this.getNodeParameter('globalFieldValue', i) as string;
+
+        const globalFieldDoTrigger = this.getNodeParameter('bDoTriggers', i) as boolean;
+        const globalFieldOverwrite = this.getNodeParameter('bOverwrite', i) as boolean;
+
+
+        const body = {
+            contactId: globalFieldContactId,
+            value: globalFieldValue,
+            doTriggers: globalFieldDoTrigger,
+            overwrite: globalFieldOverwrite,
+        };
+
+        responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${globalFieldId}/setValue`, body);
 
     } else {
         throw new Error(`Operation "${operation}" is not supported for resource "globalField".`);

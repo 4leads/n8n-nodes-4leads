@@ -70,7 +70,7 @@ export const globalFieldFields: INodeProperties[] = [
         displayOptions: {
             show: {
                 resource: ['globalField'],
-                operation: ['update', 'delete'],
+                operation: ['update', 'delete', 'getValue', 'setValue'],
             },
         },
         description: 'The ID of the global field',
@@ -89,6 +89,75 @@ export const globalFieldFields: INodeProperties[] = [
             },
         },
         description: 'The ID of the global field',
+    },
+    {
+        displayName: 'Contact ID',
+        name: 'globalFieldContactId',
+        type: 'number',
+        default: '',
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['globalField'],
+                operation: ['getValue', 'setValue'],
+            },
+        },
+        description: 'The ID of the contact',
+    },
+    {
+        displayName: 'Return everything',
+        name: 'bReturnAll',
+        type: 'boolean',
+        displayOptions: {
+            show: {
+                operation: ['get'],
+                resource: ['globalField'],
+            },
+        },
+        default: false,
+        description: 'Enable this option to return everything.',
+    },
+        {
+        displayName: 'Value',
+        name: 'globalFieldValue',
+        type: 'string',
+        default: '',
+        required: true,
+        displayOptions: {
+            show: {
+                resource: ['globalField'],
+                operation: ['setValue'],
+            },
+        },
+        description: 'The value',
+    },
+    {
+        displayName: 'Do Triggers',
+        name: 'bDoTriggers',
+        type: 'boolean',
+        default: false,
+        required: false,
+        displayOptions: {
+            show: {
+                operation: ['setValue'],
+                resource: ['globalField'],
+            },
+        },
+        description: 'If false, no automatic process will be triggered which normally listens to a value change.',
+    },
+    {
+        displayName: 'Overwrite',
+        name: 'bOverwrite',
+        type: 'boolean',
+        default: false,
+        required: false,
+        displayOptions: {
+            show: {
+                operation: ['setValue'],
+                resource: ['globalField'],
+            },
+        },
+        description: 'If false, an already present value won’t be overwritten.',
     },
     {
         displayName: 'Additional Fields',
