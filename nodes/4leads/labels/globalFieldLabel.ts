@@ -13,21 +13,6 @@ export const globalFieldOperations: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Create',
-                value: 'create',
-                action: 'Create new GlobalField',
-            },
-            {
-                name: 'Update',
-                value: 'update',
-                action: 'Update a GlobalField',
-            },
-            {
-                name: 'Delete',
-                value: 'delete',
-                action: 'Delete a GlobalField',
-            },
-            {
                 name: 'Get',
                 value: 'get',
                 action: 'List GlobalFields',
@@ -43,131 +28,11 @@ export const globalFieldOperations: INodeProperties[] = [
                 action: 'Set GlobalField Value',
             },
         ],
-        default: 'create',
+        default: 'get',
     },
 ];
 
 export const globalFieldFields: INodeProperties[] = [
-    {
-        displayName: 'Name',
-        name: 'globalFieldName',
-        type: 'string',
-        displayOptions: {
-            show: {
-                operation: ['create'],
-                resource: ['globalField'],
-            },
-        },
-        default: '',
-        required: true,
-        description: 'Choose a name for this globalField.',
-    },
-    {
-        displayName: 'Priority',
-        name: 'globalFieldPrio',
-        type: 'options',
-        default: '0',
-        description: 'Select the priority for this global field.',
-        displayOptions: {
-            show: {
-                operation: ['create', 'update'],
-                resource: ['globalField'],
-            },
-        },
-        options: [
-            {
-                name: '0 (highest)',
-                value: '0',
-            },
-            {
-                name: '1',
-                value: '1',
-            },
-            {
-                name: '2',
-                value: '2',
-            },
-            {
-                name: '3',
-                value: '3',
-            },
-            {
-                name: '4',
-                value: '4',
-            },
-            {
-                name: '5',
-                value: '5',
-            },
-            {
-                name: '6',
-                value: '6',
-            },
-            {
-                name: '7',
-                value: '7',
-            },
-            {
-                name: '8',
-                value: '8',
-            },
-            {
-                name: '9',
-                value: '9',
-            },
-            {
-                name: '10 (lowest)',
-                value: '10',
-            },
-        ],
-    },
-    {
-        displayName: 'Field Type',
-        name: 'fieldtypeId',
-        type: 'options',
-        default: 'text',
-        description: 'Select the type of the field.',
-        displayOptions: {
-            show: {
-                operation: ['create', 'update'],
-                resource: ['globalField'],
-            },
-        },
-        options: [
-            {
-                name: 'Datetime',
-                value: 'datetime'
-            },
-            {
-                name: 'Text',
-                value: 'text'
-            },
-            {
-                name: 'Checkbox',
-                value: 'checkbox'
-            },
-            {
-                name: 'Numeric',
-                value: 'numeric'
-            },
-            {
-                name: 'Numeric Sum',
-                value: 'numericsum'
-            },
-            {
-                name: 'Textarea',
-                value: 'textarea'
-            },
-            {
-                name: 'Radio',
-                value: 'radio'
-            },
-            {
-                name: 'Select',
-                value: 'select'
-            }
-        ]
-    },
     {
         displayName: 'Return everything',
         name: 'bReturnAll',
@@ -217,7 +82,7 @@ export const globalFieldFields: INodeProperties[] = [
         displayOptions: {
             show: {
                 resource: ['globalField'],
-                operation: ['update', 'delete', 'getValue'],
+                operation: ['getValue'],
             },
         },
         description: 'The ID of the global field',

@@ -10,23 +10,7 @@ export async function globalFieldHandler(
     const endpoint = 'globalFields';
     let responseData: IDataObject;
 
-    if (operation === 'create') {
-
-        // TODO
-        responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/`)
-
-    } else if (operation === 'update') {
-
-        // TODO
-        responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/`)
-
-    } else if (operation === 'delete') {
-
-        const globalFieldId = this.getNodeParameter('globalFieldId', i) as number;
-
-        responseData = await fourLeadsApiRequest.call(this, 'DELETE', `${endpoint}/${globalFieldId}`);
-
-    } else if (operation === 'get') {
+    if (operation === 'get') {
 
         const bReturnAll = this.getNodeParameter('bReturnAll', i) as boolean;
 
@@ -71,6 +55,9 @@ export async function globalFieldHandler(
     
             const flatFields = fields.flat();
 
+            if (flatFields.length > 20) {
+                throw new Error('Max. 20 Fields in 1 Request.');
+            }
     
             body = {
                 contactId: globalFieldContactId,
