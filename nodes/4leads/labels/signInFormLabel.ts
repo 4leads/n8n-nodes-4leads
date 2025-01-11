@@ -1,6 +1,6 @@
 import type { INodeProperties } from 'n8n-workflow';
 
-export const campaignOperations: INodeProperties[] = [
+export const signInFormOperations: INodeProperties[] = [
     {
         displayName: 'Operation',
         name: 'operation',
@@ -8,36 +8,36 @@ export const campaignOperations: INodeProperties[] = [
         noDataExpression: true,
         displayOptions: {
             show: {
-                resource: ['campaign'],
+                resource: ['signInForm'],
             },
         },
         options: [
             {
                 name: 'Get',
                 value: 'get',
-                action: 'List Campaigns',
+                action: 'List Sign in forms',
             },
             {
                 name: 'Delete',
                 value: 'delete',
-                action: 'Delete a Campaign',
+                action: 'Delete Sign in form',
             },
             {
                 name: 'Start',
                 value: 'start',
-                action: 'Start Campaign for Contact',
+                action: 'Start Sign in form',
             },
             {
                 name: 'Stop',
                 value: 'stop',
-                action: 'Stop Campaign for Contact',
+                action: 'Stop Sign in form',
             },
         ],
         default: 'get',
     },
 ];
 
-export const campaignFields: INodeProperties[] = [
+export const signInFormFields: INodeProperties[] = [
     {
         displayName: 'Return everything',
         name: 'bReturnAll',
@@ -45,51 +45,51 @@ export const campaignFields: INodeProperties[] = [
         displayOptions: {
             show: {
                 operation: ['get'],
-                resource: ['campaign'],
+                resource: ['signInForm'],
             },
         },
         default: false,
         description: 'Enable this option to return everything.',
     },
     {
-        displayName: 'Campaign ID',
-        name: 'campaignId',
+        displayName: 'Sign in form ID',
+        name: 'signInFormId',
         type: 'number',
         default: '',
         required: true,
         displayOptions: {
             show: {
-                resource: ['campaign'],
+                resource: ['signInForm'],
                 operation: ['get'],
                 bReturnAll: [false]
             },
         },
-        description: 'The ID of the campaign',
+        description: 'The ID of the sign in form',
     },
     {
-        displayName: 'Campaign ID',
-        name: 'campaignId',
+        displayName: 'Sign in form ID',
+        name: 'signInFormId',
         type: 'number',
         default: '',
         required: true,
         displayOptions: {
             show: {
-                resource: ['campaign'],
+                resource: ['signInForm'],
                 operation: ['delete', 'start', 'stop'],
             },
         },
-        description: 'The ID of the campaign',
+        description: 'The ID of the sign in form',
     },
     {
         displayName: 'Additional Fields',
-        name: 'campaignQs',
+        name: 'signInFormQs',
         type: 'collection',
         placeholder: 'Add Field',
         default: {},
         displayOptions: {
             show: {
                 resource: [
-                    'campaign',
+                    'signInForm',
                 ],
                 operation: [
                     'get',
@@ -100,21 +100,21 @@ export const campaignFields: INodeProperties[] = [
         options: [
             {
                 displayName: 'Search string',
-                name: 'campaignSearchString',
+                name: 'signInFormSearchString',
                 type: 'string',
                 default: '',
                 description: 'This parameter is used to specify the text you want to search for within the name fields. For example, if you\'re looking for names containing "@muster.de", you would enter this value in the searchString parameter.',
             },
             {
                 displayName: 'Page size',
-                name: 'campaignPageSize',
+                name: 'signInFormPageSize',
                 type: 'number',
                 default: '',
                 description: 'This parameter defines the number of results to display per page. You can specify values like 5, 10, 20, 50, or 200, depending on how many results you want to be shown per page in the response.',
             },
             {
                 displayName: 'Page number',
-                name: 'campaignPageNum',
+                name: 'signInFormPageNum',
                 type: 'number',
                 default: '',
                 description: 'This parameter is used to indicate the page number you want to retrieve in the result set. For example, if you want the first set of results, you would set this value to 1. If you want the second set, set it to 2, and so on.',
@@ -123,16 +123,16 @@ export const campaignFields: INodeProperties[] = [
     },
     {
         displayName: 'Contact ID',
-        name: 'campaignContactId',
+        name: 'signInFormContactId',
         type: 'number',
         default: '',
         required: true,
         displayOptions: {
             show: {
-                resource: ['campaign'],
+                resource: ['signInForm'],
                 operation: ['start', 'stop'],
             },
         },
-        description: 'The ID of the contact for whom the campaign should be started or stopped.',
+        description: 'The ID of the contact for whom the sign in form should be started or stopped.',
     },
 ];

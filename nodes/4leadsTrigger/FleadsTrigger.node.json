@@ -1,5 +1,5 @@
 {
-	"node": "n8n-nodes-base.4leads",
+	"node": "n8n-nodes-base.4leadsTrigger",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": [

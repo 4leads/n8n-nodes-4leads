@@ -4,16 +4,16 @@ import { IExecuteFunctions, NodeConnectionType } from 'n8n-workflow';
 import { tagFields, tagOperations } from './labels/tagLabel';
 import { contactFields, contactOperations } from './labels/contactLabel';
 import { optinFields, optinOperations } from './labels/optinLabel';
-import { campaignFields, campaignOperations } from './labels/campaignLabel';
+import { signInFormFields, signInFormOperations } from './labels/signInFormLabel';
 import { globalFieldFields, globalFieldOperations } from './labels/globalFieldLabel';
+import { optInCasesFields, optInCasesOperations } from './labels/optInCasesLabel';
 
 import { tagHandler } from './handlers/tagHandler';
 import { contactHandler } from './handlers/contactHandler';
-import { optinHandler } from './handlers/optinHandler'; 
-import { campaignHandler } from './handlers/campaignHandler';
+import { optinHandler } from './handlers/optinHandler';
+import { signInFormHandler } from './handlers/signInFormHandler';
 import { globalFieldHandler } from './handlers/globalFieldHandler';
 import { optInCaseHandler } from './handlers/optInCaseHandler';
-import { optInCasesFields, optInCasesOperations } from './labels/optInCasesLabel';
 
 export class Fleads implements INodeType {
 	description: INodeTypeDescription = {
@@ -63,8 +63,8 @@ export class Fleads implements INodeType {
 						value: 'optin'
 					},
 					{
-						name: 'Campaign',
-						value: 'campaign'
+						name: 'Sign in form',
+						value: 'signInForm'
 					},
 					{
 						name: 'Global Field',
@@ -88,9 +88,9 @@ export class Fleads implements INodeType {
 			// Opt-ins
 			...optinOperations,
 			...optinFields,
-			// Campaigns
-			...campaignOperations,
-			...campaignFields,
+			// Sign in form
+			...signInFormOperations,
+			...signInFormFields,
 			// Global fields
 			...globalFieldOperations,
 			...globalFieldFields,
@@ -105,12 +105,12 @@ export class Fleads implements INodeType {
 		const length = items.length as number;
 		const qs: IDataObject = {};
 		const returnData: IDataObject[] = [];
-	
+
 		let responseData: IDataObject | IDataObject[] | undefined;
-	
+
 		const resource = this.getNodeParameter('resource', 0) as string;
 		const operation = this.getNodeParameter('operation', 0) as string;
-	
+
 		for (let i = 0; i < length; i++) {
 			try {
 				if (resource === 'contact') {
@@ -119,14 +119,14 @@ export class Fleads implements INodeType {
 					responseData = await tagHandler.call(this, operation, i, qs);
 				} else if (resource === 'optin') {
 					responseData = await optinHandler.call(this, operation, i, qs);
-				} else if (resource === 'campaign') {
-					responseData = await campaignHandler.call(this, operation, i, qs);
+				} else if (resource === 'signInForm') {
+					responseData = await signInFormHandler.call(this, operation, i, qs);
 				} else if (resource === 'globalField') {
 					responseData = await globalFieldHandler.call(this, operation, i, qs);
 				} else if (resource === 'optInCases') {
 					responseData = await optInCaseHandler.call(this, operation, i, qs);
 				}
-	
+
 				if (Array.isArray(responseData)) {
 					returnData.push(...responseData);
 				} else if (responseData !== undefined) {
@@ -136,7 +136,7 @@ export class Fleads implements INodeType {
 				throw error;
 			}
 		}
-	
+
 		return [this.helpers.returnJsonArray(returnData)];
-	}	
+	}
 }
