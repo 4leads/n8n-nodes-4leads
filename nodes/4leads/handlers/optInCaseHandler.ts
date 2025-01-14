@@ -23,13 +23,21 @@ export async function optInCaseHandler(
 
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}`, undefined, qs);
         } else {
-            const optInCaseId = this.getNodeParameter('optInCaseId', i) as number;
-            responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${optInCaseId}`, undefined, qs);
+            const optInCaseId = this.getNodeParameter('optInCaseId', i) as IDataObject;
+            if (!optInCaseId.value) {
+                throw new Error('Opt-In-Case ID is required and cannot be empty.');
+            }
+            responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${optInCaseId.value}`, undefined, qs);
         }
 
     } else if (operation === 'grant' || operation === 'revoke') {
 
-        const optInCaseId = this.getNodeParameter('optInCaseId', i) as number;
+        const optInCaseId = this.getNodeParameter('optInCaseId', i) as IDataObject;
+
+        if (!optInCaseId.value) {
+            throw new Error('Opt-In-Case ID is required and cannot be empty.');
+        }
+
         const contactId = this.getNodeParameter('OptInCaseContactId', i) as number;
         const optInCaseAdditionalFields = this.getNodeParameter('optInCaseAdditionalFields', i) as IDataObject;
 
@@ -41,7 +49,7 @@ export async function optInCaseHandler(
 
         const operationEndpoint = operation === 'grant' ? '/grant' : '/revoke';
 
-        responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${optInCaseId}/${operationEndpoint}`, body);
+        responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${optInCaseId.value}/${operationEndpoint}`, body);
 
     } else {
         throw new Error(`Operation "${operation}" is not supported for resource "optInCase".`);

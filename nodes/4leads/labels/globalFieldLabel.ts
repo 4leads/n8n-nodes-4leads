@@ -60,6 +60,87 @@ export const globalFieldFields: INodeProperties[] = [
         description: 'Enable this option to set multiple fields at once.',
     },
     {
+		displayName: 'Global field',
+		name: 'globalFieldId',
+		type: 'resourceLocator',
+		default: { mode: 'list', value: '' },
+		placeholder: 'Select a global field...',
+		description: 'Select a global field...',
+        displayOptions: {
+            show: {
+                resource: ['globalField'],
+                operation: ['getValue'],
+            },
+        },
+		modes: [
+			{
+				displayName: 'From List',
+				name: 'list',
+				type: 'list',
+				placeholder: 'Select a global field...',
+				typeOptions: {
+					searchListMethod: 'getGlobalFields',
+					searchable: true,
+				},
+			},
+			{
+				displayName: 'By ID',
+				name: 'id',
+				type: 'string',
+				validation: [
+					{
+						type: 'regex',
+						properties: {
+							regex: '^[0-9]*$',
+							errorMessage: 'Not a valid global field ID',
+						},
+					},
+				],
+			},
+		],
+	},
+    {
+		displayName: 'Global field',
+		name: 'globalFieldId',
+		type: 'resourceLocator',
+		default: { mode: 'list', value: '' },
+		placeholder: 'Select a global field...',
+		description: 'Select a global field...',
+        displayOptions: {
+            show: {
+                resource: ['globalField'],
+                operation: ['setValue'],
+                bSetMultiFields: [false],
+            },
+        },
+		modes: [
+			{
+				displayName: 'From List',
+				name: 'list',
+				type: 'list',
+				placeholder: 'Select a global field...',
+				typeOptions: {
+					searchListMethod: 'getGlobalFields',
+					searchable: true,
+				},
+			},
+			{
+				displayName: 'By ID',
+				name: 'id',
+				type: 'string',
+				validation: [
+					{
+						type: 'regex',
+						properties: {
+							regex: '^[0-9]*$',
+							errorMessage: 'Not a valid global field ID',
+						},
+					},
+				],
+			},
+		],
+	},
+    {
         displayName: 'Contact ID',
         name: 'globalFieldContactId',
         type: 'number',
@@ -74,40 +155,12 @@ export const globalFieldFields: INodeProperties[] = [
         description: 'The ID of the contact',
     },
     {
-        displayName: 'Global field ID',
-        name: 'globalFieldId',
-        type: 'number',
-        default: '',
-        required: true,
-        displayOptions: {
-            show: {
-                resource: ['globalField'],
-                operation: ['getValue'],
-            },
-        },
-        description: 'The ID of the global field',
-    },
-    {
-        displayName: 'Global field ID',
-        name: 'globalFieldId',
-        type: 'number',
-        default: '',
-        required: true,
-        displayOptions: {
-            show: {
-                resource: ['globalField'],
-                operation: ['setValue'],
-                bSetMultiFields: [false],
-            },
-        },
-        description: 'The ID of the global field',
-    },
-    {
-        displayName: 'Global field ID',
-        name: 'globalFieldId',
-        type: 'number',
-        default: '',
-        required: true,
+		displayName: 'Global field',
+		name: 'globalFieldId',
+		type: 'resourceLocator',
+		default: { mode: 'list', value: '' },
+		placeholder: 'Select a global field...',
+		description: 'Select a global field...',
         displayOptions: {
             show: {
                 resource: ['globalField'],
@@ -115,8 +168,33 @@ export const globalFieldFields: INodeProperties[] = [
                 bReturnAll: [false],
             },
         },
-        description: 'The ID of the global field',
-    },
+		modes: [
+			{
+				displayName: 'From List',
+				name: 'list',
+				type: 'list',
+				placeholder: 'Select a global field...',
+				typeOptions: {
+					searchListMethod: 'getGlobalFields',
+					searchable: true,
+				},
+			},
+			{
+				displayName: 'By ID',
+				name: 'id',
+				type: 'string',
+				validation: [
+					{
+						type: 'regex',
+						properties: {
+							regex: '^[0-9]*$',
+							errorMessage: 'Not a valid global field ID',
+						},
+					},
+				],
+			},
+		],
+	},
     {
         displayName: 'Fields to Set (max. 20)',
         name: 'fieldsToSet',

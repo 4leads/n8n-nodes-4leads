@@ -34,25 +34,52 @@ export const optInCasesOperations: INodeProperties[] = [
 
 export const optInCasesFields: INodeProperties[] = [
     {
-        displayName: 'Opt-in-case ID',
+        displayName: 'Opt-In-Case',
         name: 'optInCaseId',
-        type: 'number',
-        default: '',
-        required: true,
+        type: 'resourceLocator',
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a opt-in-case...',
+        description: 'Select a opt-in-case...',
         displayOptions: {
             show: {
                 resource: ['optInCases'],
                 operation: ['grant', 'revoke'],
             },
         },
-        description: 'The ID of the opt-in-case',
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a opt-in-case...',
+                typeOptions: {
+                    searchListMethod: 'getOptInCases',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid opt-in-case ID',
+                        },
+                    },
+                ],
+            },
+        ],
     },
     {
-        displayName: 'Opt-in-case ID',
+        displayName: 'Opt-In-Case',
         name: 'optInCaseId',
-        type: 'number',
-        default: '',
-        required: true,
+        type: 'resourceLocator',
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a opt-in-case...',
+        description: 'Select a opt-in-case...',
         displayOptions: {
             show: {
                 resource: ['optInCases'],
@@ -60,7 +87,32 @@ export const optInCasesFields: INodeProperties[] = [
                 bReturnAll: [false],
             },
         },
-        description: 'The ID of the opt-in-case',
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a opt-in-case...',
+                typeOptions: {
+                    searchListMethod: 'getOptInCases',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid opt-in-case ID',
+                        },
+                    },
+                ],
+            },
+        ],
     },
     {
         displayName: 'Contact ID',

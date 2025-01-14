@@ -93,7 +93,7 @@ export async function getContacts(
     filter?: string,
 ): Promise<INodeListSearchResult> {
     const response = await fourLeadsApiRequest.call(this, 'GET', 'contacts');
-    
+
     const contacts = response?.data?.results;
 
     if (!Array.isArray(contacts)) {
@@ -103,8 +103,8 @@ export async function getContacts(
     const results: INodeListSearchItems[] = contacts
         .map((contact) => ({
             name: (contact.fname || contact.lname)
-            ? `${contact.fname || ''} ${contact.lname || ''}`.trim()
-            : contact.email || 'No Name', // Fallback: if no name is set, display email instead
+                ? `${contact.fname || ''} ${contact.lname || ''}`.trim()
+                : contact.email || 'No Name', // Fallback: if no name is set, display email instead
             value: contact.id,
         }))
         .filter(
@@ -112,6 +112,102 @@ export async function getContacts(
                 !filter ||
                 contact.name.toLowerCase().includes(filter.toLowerCase()) ||
                 contact.value?.toString() === filter,
+        )
+        .sort((a, b) => {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+            return 0;
+        });
+
+    return { results };
+}
+
+export async function getOptins(
+    this: ILoadOptionsFunctions,
+    filter?: string,
+): Promise<INodeListSearchResult> {
+    const response = await fourLeadsApiRequest.call(this, 'GET', 'opt-ins');
+
+    const optins = response?.data?.results;
+
+    if (!Array.isArray(optins)) {
+        return { results: [] };
+    }
+
+    const results: INodeListSearchItems[] = optins
+        .map((optin) => ({
+            name: optin.name,
+            value: optin.id,
+        }))
+        .filter(
+            (optin) =>
+                !filter ||
+                optin.name.toLowerCase().includes(filter.toLowerCase()) ||
+                optin.value?.toString() === filter,
+        )
+        .sort((a, b) => {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+            return 0;
+        });
+
+    return { results };
+}
+
+export async function getGlobalFields(
+    this: ILoadOptionsFunctions,
+    filter?: string,
+): Promise<INodeListSearchResult> {
+    const response = await fourLeadsApiRequest.call(this, 'GET', 'globalFields');
+
+    const globalfields = response?.data?.results;
+
+    if (!Array.isArray(globalfields)) {
+        return { results: [] };
+    }
+
+    const results: INodeListSearchItems[] = globalfields
+        .map((globalfield) => ({
+            name: globalfield.name,
+            value: globalfield.id,
+        }))
+        .filter(
+            (globalfield) =>
+                !filter ||
+                globalfield.name.toLowerCase().includes(filter.toLowerCase()) ||
+                globalfield.value?.toString() === filter,
+        )
+        .sort((a, b) => {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+            return 0;
+        });
+
+    return { results };
+}
+
+export async function getOptInCases(
+    this: ILoadOptionsFunctions,
+    filter?: string,
+): Promise<INodeListSearchResult> {
+    const response = await fourLeadsApiRequest.call(this, 'GET', 'opt-in-cases');
+
+    const optInCases = response?.data?.results;
+
+    if (!Array.isArray(optInCases)) {
+        return { results: [] };
+    }
+
+    const results: INodeListSearchItems[] = optInCases
+        .map((optInCase) => ({
+            name: optInCase.name,
+            value: optInCase.id,
+        }))
+        .filter(
+            (optInCase) =>
+                !filter ||
+                optInCase.name.toLowerCase().includes(filter.toLowerCase()) ||
+                optInCase.value?.toString() === filter,
         )
         .sort((a, b) => {
             if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;

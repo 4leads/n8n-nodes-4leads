@@ -52,20 +52,86 @@ export const optinFields: INodeProperties[] = [
         description: 'Enable this option to return everything.',
     },
     {
-        displayName: 'Opt-in ID',
-        name: 'optinId',
-        type: 'number',
-        default: '',
-        required: true,
+		displayName: 'Opt-in',
+		name: 'optinId',
+		type: 'resourceLocator',
+		default: { mode: 'list', value: '' },
+		placeholder: 'Select a opt-in...',
+		description: 'Select a opt-in...',
         displayOptions: {
             show: {
                 resource: ['optin'],
-                operation: ['get', 'delete', 'send'],
+                operation: ['get'],
                 bReturnAll: [false],
             },
         },
-        description: 'The ID of the opt-in',
-    },
+		modes: [
+			{
+				displayName: 'From List',
+				name: 'list',
+				type: 'list',
+				placeholder: 'Select a opt-in...',
+				typeOptions: {
+					searchListMethod: 'getOptins',
+					searchable: true,
+				},
+			},
+			{
+				displayName: 'By ID',
+				name: 'id',
+				type: 'string',
+				validation: [
+					{
+						type: 'regex',
+						properties: {
+							regex: '^[0-9]*$',
+							errorMessage: 'Not a valid opt-in ID',
+						},
+					},
+				],
+			},
+		],
+	},
+    {
+		displayName: 'Opt-in',
+		name: 'optinId',
+		type: 'resourceLocator',
+		default: { mode: 'list', value: '' },
+		placeholder: 'Select a opt-in...',
+		description: 'Select a opt-in...',
+        displayOptions: {
+            show: {
+                resource: ['optin'],
+                operation: ['delete', 'send'],
+            },
+        },
+		modes: [
+			{
+				displayName: 'From List',
+				name: 'list',
+				type: 'list',
+				placeholder: 'Select a opt-in...',
+				typeOptions: {
+					searchListMethod: 'getOptins',
+					searchable: true,
+				},
+			},
+			{
+				displayName: 'By ID',
+				name: 'id',
+				type: 'string',
+				validation: [
+					{
+						type: 'regex',
+						properties: {
+							regex: '^[0-9]*$',
+							errorMessage: 'Not a valid opt-in ID',
+						},
+					},
+				],
+			},
+		],
+	},
     {
         displayName: 'Contact ID',
         name: 'optinContactId',
