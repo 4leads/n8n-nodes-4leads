@@ -14,7 +14,7 @@ import { optinHandler } from './handlers/optinHandler';
 import { signInFormHandler } from './handlers/signInFormHandler';
 import { globalFieldHandler } from './handlers/globalFieldHandler';
 import { optInCaseHandler } from './handlers/optInCaseHandler';
-import { getTags } from './GenericFunctions';
+import { getContacts, getTags } from './GenericFunctions';
 
 export class Fleads implements INodeType {
 	description: INodeTypeDescription = {
@@ -80,12 +80,12 @@ export class Fleads implements INodeType {
 				description: 'The resource to operate on. ',
 			},
 
-			// Contacts
-			...contactOperations,
-			...contactFields,
 			// Tags
 			...tagOperations,
 			...tagFields,
+			// Contacts
+			...contactOperations,
+			...contactFields,
 			// Opt-ins
 			...optinOperations,
 			...optinFields,
@@ -104,6 +104,7 @@ export class Fleads implements INodeType {
 	methods = {
 		listSearch: {
 			getTags,
+			getContacts,
 		},
 	};
 
