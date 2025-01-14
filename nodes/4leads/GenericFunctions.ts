@@ -1,39 +1,5 @@
 import { IDataObject, IExecuteFunctions, IExecuteSingleFunctions, IHttpRequestMethods, ILoadOptionsFunctions, IRequestOptions, INodeListSearchResult, INodeListSearchItems, NodeApiError, NodeOperationError } from "n8n-workflow";
 
-export async function getTags(
-	this: ILoadOptionsFunctions,
-	filter?: string,
-): Promise<INodeListSearchResult> {
-	const response = await fourLeadsApiRequest.call(this, 'GET', 'tags');
-
-	const tags = response?.data?.results;
-
-	if (!Array.isArray(tags)) {
-		return { results: [] };
-	}
-
-	const results: INodeListSearchItems[] = tags
-		.map((tag) => ({
-			name: tag.name,
-			value: tag.id,
-			description: tag.description,
-		}))
-		.filter(
-			(tag) =>
-				!filter ||
-				tag.name.toLowerCase().includes(filter.toLowerCase()) ||
-				tag.description?.toLowerCase().includes(filter.toLowerCase()) ||
-				tag.value?.toString() === filter,
-		)
-		.sort((a, b) => {
-			if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-			if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-			return 0;
-		});
-
-	return { results };
-}
-
 export async function fourLeadsApiRequest(
     this: IExecuteFunctions | IExecuteSingleFunctions | ILoadOptionsFunctions,
     method: IHttpRequestMethods,
@@ -88,4 +54,36 @@ export async function fourLeadsApiRequest(
     } else {
         return { 'success': true };
     }
+}
+
+export async function getTags(
+    this: ILoadOptionsFunctions,
+    filter?: string,
+): Promise<INodeListSearchResult> {
+    const response = await fourLeadsApiRequest.call(this, 'GET', 'tags');
+
+    const tags = response?.data?.results;
+
+    if (!Array.isArray(tags)) {
+        return { results: [] };
+    }
+
+    const results: INodeListSearchItems[] = tags
+        .map((tag) => ({
+            name: tag.name,
+            value: tag.id,
+        }))
+        .filter(
+            (tag) =>
+                !filter ||
+                tag.name.toLowerCase().includes(filter.toLowerCase()) ||
+                tag.value?.toString() === filter,
+        )
+        .sort((a, b) => {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+            return 0;
+        });
+
+    return { results };
 }

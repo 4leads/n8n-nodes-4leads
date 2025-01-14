@@ -14,6 +14,7 @@ import { optinHandler } from './handlers/optinHandler';
 import { signInFormHandler } from './handlers/signInFormHandler';
 import { globalFieldHandler } from './handlers/globalFieldHandler';
 import { optInCaseHandler } from './handlers/optInCaseHandler';
+import { getTags } from './GenericFunctions';
 
 export class Fleads implements INodeType {
 	description: INodeTypeDescription = {
@@ -98,6 +99,12 @@ export class Fleads implements INodeType {
 			...optInCasesOperations,
 			...optInCasesFields,
 		]
+	};
+
+	methods = {
+		listSearch: {
+			getTags,
+		},
 	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {

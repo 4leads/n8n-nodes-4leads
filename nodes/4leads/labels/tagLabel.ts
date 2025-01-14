@@ -60,18 +60,44 @@ export const tagFields: INodeProperties[] = [
     //             tag: update, get, delete
     // ----------------------------------------
 	{
-		displayName: 'Tag ID',
+		displayName: 'Tag',
 		name: 'tagId',
-		type: 'number',
-		default: '',
-		required: true,
+		type: 'resourceLocator',
+		default: { mode: 'list', value: '' },
+		placeholder: 'Select a tag...',
+		description: 'Select a tag...',
 		displayOptions: {
 			show: {
 				resource: ['tag'],
 				operation: ['update', 'delete'],
 			},
 		},
-		description: 'The ID of the tag',
+		modes: [
+			{
+				displayName: 'From List',
+				name: 'list',
+				type: 'list',
+				placeholder: 'Select a tag...',
+				typeOptions: {
+					searchListMethod: 'getTags',
+					searchable: true,
+				},
+			},
+			{
+				displayName: 'By ID',
+				name: 'id',
+				type: 'string',
+				validation: [
+					{
+						type: 'regex',
+						properties: {
+							regex: '^[0-9]*$',
+							errorMessage: 'Not a valid tag ID',
+						},
+					},
+				],
+			},
+		],
 	},
 	// ----------------------------------------
     //             tag: get
@@ -90,11 +116,12 @@ export const tagFields: INodeProperties[] = [
         description: 'Enable this option to return everything.',
     },
 	{
-		displayName: 'Tag ID',
+		displayName: 'Tag',
 		name: 'tagId',
-		type: 'number',
-		default: '',
-		required: true,
+		type: 'resourceLocator',
+		default: { mode: 'list', value: '' },
+		placeholder: 'Select a tag...',
+		description: 'Select a tag...',
 		displayOptions: {
 			show: {
 				resource: ['tag'],
@@ -102,7 +129,32 @@ export const tagFields: INodeProperties[] = [
 				bReturnAll: [false]
 			},
 		},
-		description: 'The ID of the tag',
+		modes: [
+			{
+				displayName: 'From List',
+				name: 'list',
+				type: 'list',
+				placeholder: 'Select a tag...',
+				typeOptions: {
+					searchListMethod: 'getTags',
+					searchable: true,
+				},
+			},
+			{
+				displayName: 'By ID',
+				name: 'id',
+				type: 'string',
+				validation: [
+					{
+						type: 'regex',
+						properties: {
+							regex: '^[0-9]*$',
+							errorMessage: 'Not a valid tag ID',
+						},
+					},
+				],
+			},
+		],
 	},
 	{
 		displayName: 'Additional Fields',

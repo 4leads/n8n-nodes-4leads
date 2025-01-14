@@ -22,7 +22,12 @@ export async function tagHandler(
 
     } else if (operation === 'update') {
 
-        const tagId = this.getNodeParameter('tagId', i) as number;
+        const tagId = this.getNodeParameter('tagId', i) as IDataObject;
+
+        if (!tagId.value) {
+            throw new Error('Tag ID is required and cannot be empty.');
+        }
+
         const updatedFields = this.getNodeParameter('tagUpdateFields', i) as IDataObject;
 
         const body: IDataObject = {};
@@ -35,13 +40,17 @@ export async function tagHandler(
             body.description = updatedFields.updatedTagDescription;
         }
 
-        responseData = await fourLeadsApiRequest.call(this, 'PUT', `${endpoint}/${tagId}`, body);
+        responseData = await fourLeadsApiRequest.call(this, 'PUT', `${endpoint}/${tagId.value}`, body);
 
     } else if (operation === 'delete') {
 
-        const tagId = this.getNodeParameter('tagId', i) as number;
+        const tagId = this.getNodeParameter('tagId', i) as IDataObject;
 
-        responseData = await fourLeadsApiRequest.call(this, 'DELETE', `${endpoint}/${tagId}`);
+        if (!tagId.value) {
+            throw new Error('Tag ID is required and cannot be empty.');
+        }
+
+        responseData = await fourLeadsApiRequest.call(this, 'DELETE', `${endpoint}/${tagId.value}`);
 
     } else if (operation === 'get') {
 
@@ -56,8 +65,11 @@ export async function tagHandler(
 
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}`, undefined, qs);
         } else {
-            const tagId = this.getNodeParameter('tagId', i) as number;
-            responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${tagId}`, undefined, qs);
+            const tagId = this.getNodeParameter('tagId', i) as IDataObject;
+            if (!tagId.value) {
+                throw new Error('Tag ID is required and cannot be empty.');
+            }
+            responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${tagId.value}`, undefined, qs);
         }
 
     } else {
