@@ -1,4 +1,8 @@
-import { INodeType, INodeTypeDescription, INodeExecutionData, IDataObject } from 'n8n-workflow';
+import {
+	INodeType, INodeTypeDescription, INodeExecutionData, IDataObject,
+	ILoadOptionsFunctions,
+	INodePropertyOptions
+} from 'n8n-workflow';
 import { IExecuteFunctions, NodeConnectionType } from 'n8n-workflow';
 
 import { tagFields, tagOperations } from './labels/tagLabel';
@@ -102,6 +106,9 @@ export class Fleads implements INodeType {
 	};
 
 	methods = {
+		/**
+		 * Used to search and filter a list of results from an API.
+		 */
 		listSearch: {
 			getTags,
 			getContacts,
@@ -110,7 +117,21 @@ export class Fleads implements INodeType {
 			getGlobalFields,
 			getOptInCases,
 		},
-	};
+		loadOptions: {
+			/**
+			 * Used to load options for a drop-down or selection fields.
+			 * No pagination or filtering required.
+			 */
+			async getTags(this: ILoadOptionsFunctions, filter?: string): Promise<INodePropertyOptions[]> {
+				const result = await getTags.call(this, filter);
+
+				return result.results.map((tag) => ({
+					name: tag.name,
+					value: tag.value,
+				}));
+			},
+		},
+	}
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();

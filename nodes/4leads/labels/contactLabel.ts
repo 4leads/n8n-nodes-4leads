@@ -371,47 +371,47 @@ export const contactFields: INodeProperties[] = [
     //        addATag, removeATag
     // ----------------------------------------
     {
-		displayName: 'Contact',
-		name: 'contactId',
-		type: 'resourceLocator',
-		default: { mode: 'list', value: '' },
-		placeholder: 'Select a contact...',
-		description: 'Select a contact...',
-		displayOptions: {
-			show: {
-				resource: ['contact'],
+        displayName: 'Contact',
+        name: 'contactId',
+        type: 'resourceLocator',
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a contact...',
+        description: 'Select a contact...',
+        displayOptions: {
+            show: {
+                resource: ['contact'],
                 operation: ['update', 'delete',
                     'addATag', 'removeATag',
                     'getContactTagList', 'getContactFieldList'],
-			},
-		},
-		modes: [
-			{
-				displayName: 'From List',
-				name: 'list',
-				type: 'list',
-				placeholder: 'Select a contact...',
-				typeOptions: {
-					searchListMethod: 'getContacts',
-					searchable: true,
-				},
-			},
-			{
-				displayName: 'By ID',
-				name: 'id',
-				type: 'string',
-				validation: [
-					{
-						type: 'regex',
-						properties: {
-							regex: '^[0-9]*$',
-							errorMessage: 'Not a valid contact ID',
-						},
-					},
-				],
-			},
-		],
-	},
+            },
+        },
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a contact...',
+                typeOptions: {
+                    searchListMethod: 'getContacts',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid contact ID',
+                        },
+                    },
+                ],
+            },
+        ],
+    },
     // ----------------------------------------
     //             contact: create
     //             all other fields
@@ -704,47 +704,47 @@ export const contactFields: INodeProperties[] = [
     // ----------------------------------------
     //             contact: get
     // ----------------------------------------
-	{
-		displayName: 'Contact',
-		name: 'contactId',
-		type: 'resourceLocator',
-		default: { mode: 'list', value: '' },
-		placeholder: 'Select a contact...',
-		description: 'Select a contact...',
-		displayOptions: {
-			show: {
-				resource: ['contact'],
-				operation: ['get'],
-				bReturnAll: [false]
-			},
-		},
-		modes: [
-			{
-				displayName: 'From List',
-				name: 'list',
-				type: 'list',
-				placeholder: 'Select a contact...',
-				typeOptions: {
-					searchListMethod: 'getContacts',
-					searchable: true,
-				},
-			},
-			{
-				displayName: 'By ID',
-				name: 'id',
-				type: 'string',
-				validation: [
-					{
-						type: 'regex',
-						properties: {
-							regex: '^[0-9]*$',
-							errorMessage: 'Not a valid contact ID',
-						},
-					},
-				],
-			},
-		],
-	},
+    {
+        displayName: 'Contact',
+        name: 'contactId',
+        type: 'resourceLocator',
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a contact...',
+        description: 'Select a contact...',
+        displayOptions: {
+            show: {
+                resource: ['contact'],
+                operation: ['get'],
+                bReturnAll: [false]
+            },
+        },
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a contact...',
+                typeOptions: {
+                    searchListMethod: 'getContacts',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid contact ID',
+                        },
+                    },
+                ],
+            },
+        ],
+    },
     {
         displayName: 'Return everything',
         name: 'bReturnAll',
@@ -816,11 +816,30 @@ export const contactFields: INodeProperties[] = [
         description: 'Enable this option to provide a list of tags to add or remove from a contact.',
     },
     {
-        displayName: 'Tag ID',
+        displayName: 'Tags',
+        name: 'contactTagIdList',
+        type: 'multiOptions',
+        default: [],
+        placeholder: 'Select one or more tags...',
+        description: 'Select one or more tags from the list.',
+        displayOptions: {
+            show: {
+                resource: ['contact'],
+                operation: ['addATag', 'removeATag'],
+                bListOfTags: [true],
+            },
+        },
+        typeOptions: {
+            loadOptionsMethod: 'getTags',
+        },
+    },
+    {
+        displayName: 'Tag',
         name: 'contactTagId',
-        type: 'number',
-        default: '',
-        required: false,
+        type: 'resourceLocator',
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a tag...',
+        description: 'Select a tag...',
         displayOptions: {
             show: {
                 resource: ['contact'],
@@ -828,23 +847,31 @@ export const contactFields: INodeProperties[] = [
                 bListOfTags: [false]
             },
         },
-        placeholder: '25512',
-        description: 'The unique identifier of the tag to be used for the specified action.',
-    },
-    {
-        displayName: 'Tag ID list',
-        name: 'contactTagIdList',
-        type: 'string',
-        default: '',
-        required: false,
-        displayOptions: {
-            show: {
-                resource: ['contact'],
-                operation: ['addATag', 'removeATag'],
-                bListOfTags: [true]
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a tag...',
+                typeOptions: {
+                    searchListMethod: 'getTags',
+                    searchable: true,
+                },
             },
-        },
-        placeholder: '25512, 25513, 25514 ...',
-        description: 'Provide a comma-separated list of tag IDs to be used for the specified action.',
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid tag ID',
+                        },
+                    },
+                ],
+            },
+        ],
     },
 ];

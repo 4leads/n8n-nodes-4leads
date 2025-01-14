@@ -156,12 +156,11 @@ export async function contactHandler(
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${contactId.value}`, undefined, qs);
         }
 
-    } else if (operation === 'addATag') {
-
-        const contactId = this.getNodeParameter('contactId', i) as IDataObject
+    } else if (operation === 'addATag' || operation === 'removeATag') {
+        const contactId = this.getNodeParameter('contactId', i) as IDataObject;
 
         if (!contactId.value) {
-            throw new Error('Contact ID is required and cannot be empty.')
+            throw new Error('Contact ID is required and cannot be empty.');
         }
 
         const bListOfTags = this.getNodeParameter('bListOfTags', i) as boolean;
@@ -171,63 +170,23 @@ export async function contactHandler(
 
         if (bListOfTags) {
             // Handle list of tag IDs
-            segment = 'addTagList';
-            const tagIdsString = this.getNodeParameter('contactTagIdList', i) as string;
-            const tagIds = tagIdsString.split(',').map(id => parseInt(id.trim(), 10)); // Convert string to number array
+            segment = operation === 'addATag' ? 'addTagList' : 'removeTagList';
+            const tagIds = this.getNodeParameter('contactTagIdList', i) as number[];
 
             body = {
                 tagIds: tagIds,
             };
-
         } else {
-            segment = 'addTag';
             // Handle single tag ID
-            const tagId = this.getNodeParameter('contactTagId', i) as number;
+            segment = operation === 'addATag' ? 'addTag' : 'removeTag';
+            const tagId = this.getNodeParameter('contactTagId', i) as IDataObject;
 
             body = {
-                tagId: tagId,
+                tagId: tagId.value,
             };
-
         }
 
         responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${contactId.value}/${segment}`, body);
-
-    } else if (operation === 'removeATag') {
-
-        const contactId = this.getNodeParameter('contactId', i) as IDataObject
-
-        if (!contactId.value) {
-            throw new Error('Contact ID is required and cannot be empty.')
-        }
-
-        const bListOfTags = this.getNodeParameter('bListOfTags', i) as boolean;
-
-        let body: IDataObject;
-        let segment: string;
-
-        if (bListOfTags) {
-            // Handle list of tag IDs
-            segment = 'removeTagList';
-            const tagIdsString = this.getNodeParameter('contactTagIdList', i) as string;
-            const tagIds = tagIdsString.split(',').map(id => parseInt(id.trim(), 10)); // Convert string to number array
-
-            body = {
-                tagIds: tagIds,
-            };
-
-        } else {
-            segment = 'removeTag';
-            // Handle single tag ID
-            const tagId = this.getNodeParameter('contactTagId', i) as number;
-
-            body = {
-                tagId: tagId,
-            };
-
-        }
-
-        responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${contactId.value}/${segment}`, body);
-
     } else if (operation === 'getContactTagList') {
 
         const contactId = this.getNodeParameter('contactId', i) as IDataObject
