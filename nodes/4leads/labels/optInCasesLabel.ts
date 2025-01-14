@@ -115,18 +115,45 @@ export const optInCasesFields: INodeProperties[] = [
         ],
     },
     {
-        displayName: 'Contact ID',
+        displayName: 'Contact',
         name: 'OptInCaseContactId',
-        type: 'number',
-        default: '',
+        type: 'resourceLocator',
         required: true,
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a contact...',
+        description: 'Select a contact...',
         displayOptions: {
             show: {
                 resource: ['optInCases'],
                 operation: ['grant', 'revoke'],
             },
         },
-        description: 'The ID of the contact',
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a contact...',
+                typeOptions: {
+                    searchListMethod: 'getContacts',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid contact ID',
+                        },
+                    },
+                ],
+            },
+        ],
     },
     {
         displayName: 'Return everything',

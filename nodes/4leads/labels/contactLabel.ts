@@ -803,7 +803,7 @@ export const contactFields: INodeProperties[] = [
     //       contact: addATag, removeATag
     // ----------------------------------------
     {
-        displayName: 'Add a list of tags',
+        displayName: 'Edit a list of tags',
         name: 'bListOfTags',
         type: 'boolean',
         displayOptions: {

@@ -233,6 +233,8 @@ export const globalFieldFields: INodeProperties[] = [
         },
         displayOptions: {
             show: {
+                resource: ['globalField'],
+                operation: ['setValue'],
                 bSetMultiFields: [true],
             },
         },

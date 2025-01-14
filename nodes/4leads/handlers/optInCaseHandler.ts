@@ -38,11 +38,16 @@ export async function optInCaseHandler(
             throw new Error('Opt-In-Case ID is required and cannot be empty.');
         }
 
-        const contactId = this.getNodeParameter('OptInCaseContactId', i) as number;
+        const contactId = this.getNodeParameter('OptInCaseContactId', i) as IDataObject;
+
+        if (!contactId.value) {
+            throw new Error('Contact ID is required and cannot be empty.');
+        }
+        
         const optInCaseAdditionalFields = this.getNodeParameter('optInCaseAdditionalFields', i) as IDataObject;
 
         const body: IDataObject = {
-            contactId: contactId,
+            contactId: contactId.value,
         }
 
         if (optInCaseAdditionalFields.optInCaseIp) body.ip = optInCaseAdditionalFields.optInCaseIp
