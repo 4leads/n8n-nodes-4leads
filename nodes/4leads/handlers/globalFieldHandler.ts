@@ -31,66 +31,58 @@ export async function globalFieldHandler(
         }
 
     } else if (operation === 'getValue') {
-
         const globalFieldId = this.getNodeParameter('globalFieldId', i) as IDataObject;
 
         if (!globalFieldId.value) {
             throw new Error('Global field ID is required and cannot be empty.');
         }
 
-        const globalFieldContactId = this.getNodeParameter('globalFieldContactId', i) as number;
+        const globalFieldContactId = this.getNodeParameter('globalFieldContactId', i) as IDataObject;
 
-        const qs = { contactId: globalFieldContactId };
+        const qs = { contactId: globalFieldContactId.value };
 
         responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${globalFieldId.value}/getValue`, undefined, qs);
-
     } else if (operation === 'setValue') {
         const bSetMultiFields = this.getNodeParameter('bSetMultiFields', i) as boolean;
-        const globalFieldContactId = this.getNodeParameter('globalFieldContactId', i) as number;
+        const globalFieldContactId = this.getNodeParameter('globalFieldContactId', i) as IDataObject;
 
         let body;
 
         if (bSetMultiFields) {
-            let fields = this.getNodeParameter('fieldsToSet', i) as Object;
+            let fields = this.getNodeParameter('fieldsToSet', i) as IDataObject;
 
-            if (fields && !Array.isArray(fields)) {
-                fields = Object.values(fields);
+            if (!Array.isArray(fields.field)) {
+                throw new Error("fields.field is not a valid array");
             }
 
-            if (!Array.isArray(fields)) {
-                throw new Error('The "fieldsToSet" parameter is not an array or object with values!');
-            }
-
-            const flatFields = fields.flat();
-
-            if (flatFields.length > 20) {
-                throw new Error('Max. 20 Fields in 1 Request.');
-            }
+            const formattedFields = fields.field.map((field: any) => ({
+                globalFieldId: field.globalFieldId.value,
+                value: field.value,
+                doTriggers: field.doTriggers,
+                overwrite: field.overwrite,
+            }));
 
             body = {
-                contactId: globalFieldContactId,
-                fields: flatFields.map((field: any) => ({
-                    globalFieldId: field.globalFieldId,
-                    value: field.value,
-                    doTriggers: field.doTriggers,
-                    overwrite: field.overwrite,
-                })),
+                contactId: globalFieldContactId.value,
+                fields: formattedFields,
             };
 
-            responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/setFieldList`, body);
+            console.log('Body:', JSON.stringify(body));
 
+            responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/setFieldList`, body);
         } else {
             const globalFieldId = this.getNodeParameter('globalFieldId', i) as IDataObject;
 
             if (!globalFieldId.value) {
                 throw new Error('Global field ID is required and cannot be empty.');
             }
+
             const globalFieldValue = this.getNodeParameter('globalFieldValue', i) as string;
             const globalFieldDoTrigger = this.getNodeParameter('bDoTriggers', i) as boolean;
             const globalFieldOverwrite = this.getNodeParameter('bOverwrite', i) as boolean;
 
             body = {
-                contactId: globalFieldContactId,
+                contactId: globalFieldContactId.value,
                 value: globalFieldValue,
                 doTriggers: globalFieldDoTrigger,
                 overwrite: globalFieldOverwrite,
@@ -98,8 +90,8 @@ export async function globalFieldHandler(
 
             responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${globalFieldId.value}/setValue`, body);
         }
-
-    } else {
+    }
+    else {
         throw new Error(`Operation "${operation}" is not supported for resource "globalField".`);
     }
 

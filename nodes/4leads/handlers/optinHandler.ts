@@ -47,27 +47,27 @@ export async function optinHandler(
             throw new Error('Opt-in ID is required and cannot be empty.');
         }
 
-        const contactId = this.getNodeParameter('optinContactId', i) as number;
+        const contactId = this.getNodeParameter('optinContactId', i) as IDataObject;
 
         if (!contactId) {
             throw new Error('Contact ID is required and cannot be empty.');
         }
 
         const body = {
-            contactId: contactId
+            contactId: contactId.value
         }
 
         responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${optinId.value}/send`, body);
 
     } else if (operation === 'optout') {
 
-        const contactId = this.getNodeParameter('optinContactId', i) as number;
+        const contactId = this.getNodeParameter('optinContactId', i) as IDataObject;
 
         if (!contactId) {
             throw new Error('Contact ID is required and cannot be empty.');
         }
 
-        responseData = await fourLeadsApiRequest.call(this, 'POST', `contacts/${contactId}/opt-out`)
+        responseData = await fourLeadsApiRequest.call(this, 'POST', `contacts/${contactId.value}/opt-out`)
 
     } else {
         throw new Error(`Operation "${operation}" is not supported for resource "optins".`);

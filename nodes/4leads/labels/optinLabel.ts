@@ -133,18 +133,44 @@ export const optinFields: INodeProperties[] = [
 		],
 	},
     {
-        displayName: 'Contact ID',
+        displayName: 'Contact',
         name: 'optinContactId',
-        type: 'number',
-        default: '',
-        required: true,
+        type: 'resourceLocator',
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a contact...',
+        description: 'Select a contact...',
         displayOptions: {
             show: {
                 resource: ['optin'],
                 operation: ['send', 'optout'],
             },
         },
-        description: 'The ID of the contact to whom the opt-in message is sent.',
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a contact...',
+                typeOptions: {
+                    searchListMethod: 'getContacts',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid contact ID',
+                        },
+                    },
+                ],
+            },
+        ],
     },
     {
         displayName: 'Additional Fields',
