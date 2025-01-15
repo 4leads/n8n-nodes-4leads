@@ -23,28 +23,39 @@ export async function signInFormHandler(
 
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}`, undefined, qs);
         } else {
-            const signInFormId = this.getNodeParameter('signInFormId', i) as number;
-            responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${signInFormId}`, undefined, qs);
+            const signInFormId = this.getNodeParameter('signInFormId', i) as IDataObject
+
+            if (!signInFormId.value) throw new Error('Sign in form ID is required and cannot be empty.');
+
+            responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${signInFormId.value}`, undefined, qs);
         }
 
     } else if (operation == 'delete') {
 
-        const signInFormId = this.getNodeParameter('signInFormId', i) as number;
+        const signInFormId = this.getNodeParameter('signInFormId', i) as IDataObject;
 
-        responseData = await fourLeadsApiRequest.call(this, 'DELETE', `${endpoint}/${signInFormId}`);
+        if (!signInFormId.value) throw new Error('Sign in form ID is required and cannot be empty.');
+
+        responseData = await fourLeadsApiRequest.call(this, 'DELETE', `${endpoint}/${signInFormId.value}`);
 
     } else if (operation === 'start' || operation === 'stop') {
 
-        const signInFormId = this.getNodeParameter('signInFormId', i) as number;
-        const contactId = this.getNodeParameter('signInFormContactId', i) as number;
+        const signInFormId = this.getNodeParameter('signInFormId', i) as IDataObject;
+
+        if (!signInFormId.value) throw new Error('Sign in form ID is required and cannot be empty.');
+
+        const contactId = this.getNodeParameter('signInFormContactId', i) as IDataObject;
+
+        if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.');
+
 
         const body = {
-            contactId: contactId
+            contactId: contactId.value
         }
 
         const operationEndpoint = operation === 'start' ? '/start' : '/stop';
 
-        responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${signInFormId}/${operationEndpoint}`, body);
+        responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${signInFormId.value}/${operationEndpoint}`, body);
 
     } else {
         throw new Error(`Operation "${operation}" is not supported for resource "signInForms".`);

@@ -24,21 +24,19 @@ export async function tagHandler(
 
         const tagId = this.getNodeParameter('tagId', i) as IDataObject;
 
-        if (!tagId.value) {
-            throw new Error('Tag ID is required and cannot be empty.');
-        }
+        if (!tagId.value) throw new Error('Tag ID is required and cannot be empty.');
 
         const updatedFields = this.getNodeParameter('tagUpdateFields', i) as IDataObject;
 
+        if (!updatedFields.updatedTagName && !updatedFields.updatedTagDescription) {
+            throw new Error('At least one of "Name" or "Description" must be provided.');
+        }
+
         const body: IDataObject = {};
 
-        if (updatedFields.updatedTagName) {
-            body.name = updatedFields.updatedTagName;
-        }
+        if (updatedFields.updatedTagName) body.name = updatedFields.updatedTagName;
 
-        if (updatedFields.updatedTagDescription) {
-            body.description = updatedFields.updatedTagDescription;
-        }
+        if (updatedFields.updatedTagDescription) body.description = updatedFields.updatedTagDescription;
 
         responseData = await fourLeadsApiRequest.call(this, 'PUT', `${endpoint}/${tagId.value}`, body);
 
@@ -46,9 +44,7 @@ export async function tagHandler(
 
         const tagId = this.getNodeParameter('tagId', i) as IDataObject;
 
-        if (!tagId.value) {
-            throw new Error('Tag ID is required and cannot be empty.');
-        }
+        if (!tagId.value) throw new Error('Tag ID is required and cannot be empty.');
 
         responseData = await fourLeadsApiRequest.call(this, 'DELETE', `${endpoint}/${tagId.value}`);
 
@@ -66,9 +62,9 @@ export async function tagHandler(
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}`, undefined, qs);
         } else {
             const tagId = this.getNodeParameter('tagId', i) as IDataObject;
-            if (!tagId.value) {
-                throw new Error('Tag ID is required and cannot be empty.');
-            }
+
+            if (!tagId.value) throw new Error('Tag ID is required and cannot be empty.');
+
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${tagId.value}`, undefined, qs);
         }
 

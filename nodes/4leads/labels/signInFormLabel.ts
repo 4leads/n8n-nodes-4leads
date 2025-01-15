@@ -52,11 +52,13 @@ export const signInFormFields: INodeProperties[] = [
         description: 'Enable this option to return everything.',
     },
     {
-        displayName: 'Sign in form ID',
+        displayName: 'Sign in form',
         name: 'signInFormId',
-        type: 'number',
-        default: '',
+        type: 'resourceLocator',
         required: true,
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a sign in form...',
+        description: 'Select a sign in form...',
         displayOptions: {
             show: {
                 resource: ['signInForm'],
@@ -64,21 +66,73 @@ export const signInFormFields: INodeProperties[] = [
                 bReturnAll: [false]
             },
         },
-        description: 'The ID of the sign in form',
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a sign in form...',
+                typeOptions: {
+                    searchListMethod: 'getGlobalFields',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid sign in form ID',
+                        },
+                    },
+                ],
+            },
+        ],
     },
     {
-        displayName: 'Sign in form ID',
+        displayName: 'Sign in form',
         name: 'signInFormId',
-        type: 'number',
-        default: '',
+        type: 'resourceLocator',
         required: true,
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a sign in form...',
+        description: 'Select a sign in form...',
         displayOptions: {
             show: {
                 resource: ['signInForm'],
                 operation: ['delete', 'start', 'stop'],
             },
         },
-        description: 'The ID of the sign in form',
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a sign in form...',
+                typeOptions: {
+                    searchListMethod: 'getGlobalFields',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid sign in form ID',
+                        },
+                    },
+                ],
+            },
+        ],
     },
     {
         displayName: 'Additional Fields',
@@ -122,17 +176,44 @@ export const signInFormFields: INodeProperties[] = [
         ],
     },
     {
-        displayName: 'Contact ID',
+        displayName: 'Contact',
         name: 'signInFormContactId',
-        type: 'number',
-        default: '',
+        type: 'resourceLocator',
         required: true,
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a contact...',
+        description: 'Select a contact...',
         displayOptions: {
             show: {
                 resource: ['signInForm'],
                 operation: ['start', 'stop'],
             },
         },
-        description: 'The ID of the contact for whom the sign in form should be started or stopped.',
-    },
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a contact...',
+                typeOptions: {
+                    searchListMethod: 'getContacts',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid contact ID',
+                        },
+                    },
+                ],
+            },
+        ],
+    }
 ];

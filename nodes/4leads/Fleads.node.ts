@@ -76,7 +76,7 @@ export class Fleads implements INodeType {
 						value: 'globalField'
 					},
 					{
-						name: 'Opt-in-cases',
+						name: 'Opt-in-case',
 						value: 'optInCases'
 					}
 				],
@@ -119,7 +119,7 @@ export class Fleads implements INodeType {
 		},
 		loadOptions: {
 			/**
-			 * Used to load options for a drop-down or selection fields.
+			 * Used to load options for drop-downs or selection fields.
 			 * No pagination or filtering required.
 			 */
 			async getTags(this: ILoadOptionsFunctions, filter?: string): Promise<INodePropertyOptions[]> {

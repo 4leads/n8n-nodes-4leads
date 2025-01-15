@@ -24,18 +24,16 @@ export async function globalFieldHandler(
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}`, undefined, qs);
         } else {
             const globalFieldId = this.getNodeParameter('globalFieldId', i) as IDataObject;
-            if (!globalFieldId.value) {
-                throw new Error('Global field ID is required and cannot be empty.');
-            }
+
+            if (!globalFieldId.value) throw new Error('Global field ID is required and cannot be empty.');
+
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${globalFieldId.value}`, undefined, qs);
         }
 
     } else if (operation === 'getValue') {
         const globalFieldId = this.getNodeParameter('globalFieldId', i) as IDataObject;
 
-        if (!globalFieldId.value) {
-            throw new Error('Global field ID is required and cannot be empty.');
-        }
+        if (!globalFieldId.value) throw new Error('Global field ID is required and cannot be empty.');
 
         const globalFieldContactId = this.getNodeParameter('globalFieldContactId', i) as IDataObject;
 
@@ -51,9 +49,7 @@ export async function globalFieldHandler(
         if (bSetMultiFields) {
             let fields = this.getNodeParameter('fieldsToSet', i) as IDataObject;
 
-            if (!Array.isArray(fields.field)) {
-                throw new Error("fields.field is not a valid array");
-            }
+            if (!Array.isArray(fields.field)) throw new Error("fields.field is not a valid array");
 
             const formattedFields = fields.field.map((field: any) => ({
                 globalFieldId: field.globalFieldId.value,
@@ -73,9 +69,7 @@ export async function globalFieldHandler(
         } else {
             const globalFieldId = this.getNodeParameter('globalFieldId', i) as IDataObject;
 
-            if (!globalFieldId.value) {
-                throw new Error('Global field ID is required and cannot be empty.');
-            }
+            if (!globalFieldId.value) throw new Error('Global field ID is required and cannot be empty.');
 
             const globalFieldValue = this.getNodeParameter('globalFieldValue', i) as string;
             const globalFieldDoTrigger = this.getNodeParameter('bDoTriggers', i) as boolean;

@@ -24,9 +24,9 @@ export async function optInCaseHandler(
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}`, undefined, qs);
         } else {
             const optInCaseId = this.getNodeParameter('optInCaseId', i) as IDataObject;
-            if (!optInCaseId.value) {
-                throw new Error('Opt-In-Case ID is required and cannot be empty.');
-            }
+
+            if (!optInCaseId.value) throw new Error('Opt-In-Case ID is required and cannot be empty.');
+
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${optInCaseId.value}`, undefined, qs);
         }
 
@@ -34,16 +34,12 @@ export async function optInCaseHandler(
 
         const optInCaseId = this.getNodeParameter('optInCaseId', i) as IDataObject;
 
-        if (!optInCaseId.value) {
-            throw new Error('Opt-In-Case ID is required and cannot be empty.');
-        }
+        if (!optInCaseId.value) throw new Error('Opt-In-Case ID is required and cannot be empty.');
 
         const contactId = this.getNodeParameter('OptInCaseContactId', i) as IDataObject;
 
-        if (!contactId.value) {
-            throw new Error('Contact ID is required and cannot be empty.');
-        }
-        
+        if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.');
+
         const optInCaseAdditionalFields = this.getNodeParameter('optInCaseAdditionalFields', i) as IDataObject;
 
         const body: IDataObject = {

@@ -71,9 +71,7 @@ export async function contactHandler(
         const contactId = this.getNodeParameter('contactId', i) as IDataObject
         const contactCreateFields = this.getNodeParameter('contactUpdateFields', i) as IDataObject;
 
-        if (!contactId.value) {
-            throw new Error('Contact ID is required and cannot be empty.')
-        }
+        if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.')
 
         const body: IDataObject = {};
 
@@ -123,16 +121,15 @@ export async function contactHandler(
 
         if (contactCreateFields.contactSkype) body.skype = contactCreateFields.contactSkype;
 
-
+        if (Object.keys(body).length === 0) throw new Error('At least one field must be provided to update the contact.');
+        
         responseData = await fourLeadsApiRequest.call(this, 'PUT', `${endpoint}/${contactId.value}`, body);
 
     } else if (operation === 'delete') {
 
         const contactId = this.getNodeParameter('contactId', i) as IDataObject
 
-        if (!contactId.value) {
-            throw new Error('Contact ID is required and cannot be empty.')
-        }
+        if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.')
 
         responseData = await fourLeadsApiRequest.call(this, 'DELETE', `${endpoint}/${contactId.value}`);
 
@@ -150,18 +147,16 @@ export async function contactHandler(
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}`, undefined, qs);
         } else {
             const contactId = this.getNodeParameter('contactId', i) as IDataObject;
-            if (!contactId.value) {
-                throw new Error('Contact ID is required and cannot be empty.');
-            }
+
+            if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.');
+
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${contactId.value}`, undefined, qs);
         }
 
     } else if (operation === 'addATag' || operation === 'removeATag') {
         const contactId = this.getNodeParameter('contactId', i) as IDataObject;
 
-        if (!contactId.value) {
-            throw new Error('Contact ID is required and cannot be empty.');
-        }
+        if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.');
 
         const bListOfTags = this.getNodeParameter('bListOfTags', i) as boolean;
 
@@ -186,14 +181,19 @@ export async function contactHandler(
             };
         }
 
+        if (
+            (!bListOfTags && !body.tagId) ||
+            (bListOfTags && (!body.tagIds || (body.tagIds as number[]).length === 0))
+        ) {
+            throw new Error('At least one tag must be provided.');
+        }
+
         responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${contactId.value}/${segment}`, body);
     } else if (operation === 'getContactTagList') {
 
         const contactId = this.getNodeParameter('contactId', i) as IDataObject
 
-        if (!contactId.value) {
-            throw new Error('Contact ID is required and cannot be empty.')
-        }
+        if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.')
 
         responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${contactId.value}/getTagList`)
 
@@ -201,9 +201,7 @@ export async function contactHandler(
 
         const contactId = this.getNodeParameter('contactId', i) as IDataObject
 
-        if (!contactId.value) {
-            throw new Error('Contact ID is required and cannot be empty.')
-        }
+        if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.')
 
         responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${contactId.value}/getFieldList`)
 

@@ -13,9 +13,7 @@ export async function optinHandler(
     if (operation === 'delete') {
 
         const optinId = this.getNodeParameter('optinId', i) as IDataObject;
-        if (!optinId.value) {
-            throw new Error('Opt-in ID is required and cannot be empty.');
-        }
+        if (!optinId.value) throw new Error('Opt-in ID is required and cannot be empty.');
 
         responseData = await fourLeadsApiRequest.call(this, 'DELETE', `${endpoint}/${optinId.value}`);
 
@@ -33,25 +31,22 @@ export async function optinHandler(
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}`, undefined, qs);
         } else {
             const optinId = this.getNodeParameter('optinId', i) as IDataObject;
-            if (!optinId.value) {
-                throw new Error('Opt-in ID is required and cannot be empty.');
-            }
+
+            if (!optinId.value) throw new Error('Opt-in ID is required and cannot be empty.');
+
             responseData = await fourLeadsApiRequest.call(this, 'GET', `${endpoint}/${optinId.value}`, undefined, qs);
         }
 
     } else if (operation === 'send') {
 
         const optinId = this.getNodeParameter('optinId', i) as IDataObject;
-        
-        if (!optinId.value) {
-            throw new Error('Opt-in ID is required and cannot be empty.');
-        }
+
+        if (!optinId.value) throw new Error('Opt-in ID is required and cannot be empty.');
+
 
         const contactId = this.getNodeParameter('optinContactId', i) as IDataObject;
 
-        if (!contactId) {
-            throw new Error('Contact ID is required and cannot be empty.');
-        }
+        if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.');
 
         const body = {
             contactId: contactId.value
@@ -63,9 +58,7 @@ export async function optinHandler(
 
         const contactId = this.getNodeParameter('optinContactId', i) as IDataObject;
 
-        if (!contactId) {
-            throw new Error('Contact ID is required and cannot be empty.');
-        }
+        if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.');
 
         responseData = await fourLeadsApiRequest.call(this, 'POST', `contacts/${contactId.value}/opt-out`)
 
