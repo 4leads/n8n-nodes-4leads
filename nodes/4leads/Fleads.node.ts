@@ -18,7 +18,7 @@ import { optinHandler } from './handlers/optinHandler';
 import { signInFormHandler } from './handlers/signInFormHandler';
 import { globalFieldHandler } from './handlers/globalFieldHandler';
 import { optInCaseHandler } from './handlers/optInCaseHandler';
-import { getContacts, getGlobalFields, getOptInCases, getOptins, getTags } from './GenericFunctions';
+import { getContacts, getGlobalFields, getOptInCases, getOptins, getTags } from '../GenericFunctions';
 
 export class Fleads implements INodeType {
 	description: INodeTypeDescription = {

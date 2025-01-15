@@ -217,3 +217,35 @@ export async function getOptInCases(
 
     return { results };
 }
+
+export async function getAutomationList(
+    this: ILoadOptionsFunctions,
+    filter?: string,
+): Promise<INodeListSearchResult> {
+    const response = await fourLeadsApiRequest.call(this, 'GET', 'automations/trigger/n8n');
+    
+    const automations = response?.data?.results;
+
+    if (!Array.isArray(automations)) {
+        return { results: [] };
+    }
+
+    const results: INodeListSearchItems[] = automations
+        .map((automation) => ({
+            name: automation.name,
+            value: automation.id,
+        }))
+        .filter(
+            (automation) =>
+                !filter ||
+                automation.name.toLowerCase().includes(filter.toLowerCase()) ||
+                automation.value?.toString() === filter,
+        )
+        .sort((a, b) => {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+            return 0;
+        });
+
+    return { results };
+}

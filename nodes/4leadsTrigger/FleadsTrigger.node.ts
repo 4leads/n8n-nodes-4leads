@@ -1,6 +1,6 @@
 import type { INodeExecutionData, INodeType, INodeTypeDescription, IPollFunctions } from 'n8n-workflow';
 import { NodeConnectionType } from 'n8n-workflow';
-import { getTags } from './GenericFunctions';
+import { getAutomationList } from '../GenericFunctions';
 
 export class FleadsTrigger implements INodeType {
     description: INodeTypeDescription = {
@@ -25,35 +25,35 @@ export class FleadsTrigger implements INodeType {
         polling: true,
         properties: [
             {
-                displayName: 'Tags',
-                name: 'tagsId',
+                displayName: 'Select an automation',
+                name: 'automationId',
                 type: 'resourceLocator',
                 default: { mode: 'list', value: '' },
                 required: true,
-                description: 'Beschreibung',
+                description: 'Select your 4leads automation.',
                 modes: [
                     {
-                        displayName: 'Tags',
+                        displayName: 'Automations',
                         name: 'list',
                         type: 'list',
-                        placeholder: 'Select a tag...',
+                        placeholder: 'Select a automation...',
                         typeOptions: {
-                            searchListMethod: 'getTags',
+                            searchListMethod: 'getAutomationList',
                             searchable: true,
                         },
                     },
                 ],
             },
             {
-                displayName: 'Trigger On',
-                name: 'triggerOn',
+                displayName: '123',
+                name: '123',
                 type: 'options',
                 required: true,
                 default: '',
                 options: [
                     {
-                        name: 'Test Trigger',
-                        value: 'triggerTest',
+                        name: '123',
+                        value: '123',
                     },
                 ],
             },
@@ -62,7 +62,7 @@ export class FleadsTrigger implements INodeType {
 
 	methods = {
 		listSearch: {
-			getTags,
+			getAutomationList,
 		},
 	};
 

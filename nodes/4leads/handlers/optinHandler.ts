@@ -1,5 +1,5 @@
 import { IExecuteFunctions, IDataObject } from 'n8n-workflow';
-import { fourLeadsApiRequest } from '../GenericFunctions';
+import { fourLeadsApiRequest } from '../../GenericFunctions';
 
 export async function optinHandler(
     this: IExecuteFunctions,
