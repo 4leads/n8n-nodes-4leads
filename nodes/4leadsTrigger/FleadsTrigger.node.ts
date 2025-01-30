@@ -68,8 +68,6 @@ export class FleadsTrigger implements INodeType {
 
         const endpoint = `https://api.4leads.eu/v1/automations/poll/${automationId.value}`;
 
-        console.log(endpoint)
-
         const responseData = await this.helpers.request({
             method: 'GET',
             url: endpoint,
@@ -81,7 +79,6 @@ export class FleadsTrigger implements INodeType {
 
         const parsedData = typeof responseData === 'string' ? JSON.parse(responseData) : responseData;
 
-        // Nur das results-Array zurückgeben
         return [this.helpers.returnJsonArray(parsedData.data?.results || [])];
     }
 }
