@@ -249,3 +249,37 @@ export async function getAutomationList(
 
     return { results };
 }
+
+export async function getActionList(
+    this: ILoadOptionsFunctions,
+    filter?: string,
+): Promise<INodeListSearchResult> {
+    const response = await fourLeadsApiRequest.call(this, 'GET', 'automations/toggle/n8n');
+    
+    const actions = response?.data?.results;
+
+    if (!Array.isArray(actions)) {
+        return { results: [] };
+    }
+
+    console.log(actions)
+
+    const results: INodeListSearchItems[] = actions
+        .map((action) => ({
+            name: action.name,
+            value: action.id,
+        }))
+        .filter(
+            (action) =>
+                !filter ||
+                action.name.toLowerCase().includes(filter.toLowerCase()) ||
+                action.value?.toString() === filter,
+        )
+        .sort((a, b) => {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+            return 0;
+        });
+
+    return { results };
+}

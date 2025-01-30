@@ -1,10 +1,10 @@
-import type { INodeExecutionData, INodeType, INodeTypeDescription, IPollFunctions } from 'n8n-workflow';
+import type { IDataObject, INodeExecutionData, INodeType, INodeTypeDescription, IPollFunctions } from 'n8n-workflow';
 import { NodeConnectionType } from 'n8n-workflow';
-import { getAutomationList } from '../GenericFunctions';
+import { getActionList } from '../GenericFunctions';
 
 export class FleadsTrigger implements INodeType {
     description: INodeTypeDescription = {
-        displayName: '4leads Trigger',
+        displayName: 'action trigger',
         name: 'FleadsTrigger',
         icon: 'file:fleads.svg',
         group: ['trigger'],
@@ -12,7 +12,7 @@ export class FleadsTrigger implements INodeType {
         subtitle: '={{$parameter["triggerOn"]}}',
         description: 'Starts the workflow when 4leads events occur',
         defaults: {
-            name: '4leads Trigger',
+            name: 'action trigger',
         },
         inputs: [],
         outputs: [NodeConnectionType.Main],
@@ -38,37 +38,50 @@ export class FleadsTrigger implements INodeType {
                         type: 'list',
                         placeholder: 'Select a automation...',
                         typeOptions: {
-                            searchListMethod: 'getAutomationList',
+                            searchListMethod: 'getActionList',
                             searchable: true,
                         },
-                    },
-                ],
-            },
-            {
-                displayName: '123',
-                name: '123',
-                type: 'options',
-                required: true,
-                default: '',
-                options: [
-                    {
-                        name: '123',
-                        value: '123',
                     },
                 ],
             },
         ],
     };
 
-	methods = {
-		listSearch: {
-			getAutomationList,
-		},
-	};
+    methods = {
+        listSearch: {
+            getActionList,
+        },
+    };
 
     async poll(this: IPollFunctions): Promise<INodeExecutionData[][] | null> {
-        console.log('hier bin ich');
+        const automationId = this.getNodeParameter('automationId') as IDataObject;
 
-        return [this.helpers.returnJsonArray({})];
+        if (!automationId.value) {
+            throw new Error('No automation ID provided.');
+        }
+
+        const credentials = await this.getCredentials('FleadsApi');
+
+        if (!credentials) {
+            throw new Error('No API credentials found.');
+        }
+
+        const endpoint = `https://api.4leads.eu/v1/automations/poll/${automationId.value}`;
+
+        console.log(endpoint)
+
+        const responseData = await this.helpers.request({
+            method: 'GET',
+            url: endpoint,
+            headers: {
+                Authorization: `Bearer ${credentials.apiKey}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const parsedData = typeof responseData === 'string' ? JSON.parse(responseData) : responseData;
+
+        // Nur das results-Array zurückgeben
+        return [this.helpers.returnJsonArray(parsedData.data?.results || [])];
     }
 }
