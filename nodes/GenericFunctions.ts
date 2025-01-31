@@ -43,7 +43,6 @@ export async function fourLeadsApiRequest(
         };
 
         responseData = await this.helpers.request(options);
-        console.log(responseData)
 
     } catch (error) {
         throw new NodeApiError(this.getNode(), error);

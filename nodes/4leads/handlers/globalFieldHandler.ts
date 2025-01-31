@@ -63,8 +63,6 @@ export async function globalFieldHandler(
                 fields: formattedFields,
             };
 
-            console.log('Body:', JSON.stringify(body));
-
             responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/setFieldList`, body);
         } else {
             const globalFieldId = this.getNodeParameter('globalFieldId', i) as IDataObject;

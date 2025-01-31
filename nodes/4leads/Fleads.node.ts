@@ -11,6 +11,7 @@ import { optinFields, optinOperations } from './labels/optinLabel';
 import { signInFormFields, signInFormOperations } from './labels/signInFormLabel';
 import { globalFieldFields, globalFieldOperations } from './labels/globalFieldLabel';
 import { optInCasesFields, optInCasesOperations } from './labels/optInCasesLabel';
+import { campaignFields, campaignOperations } from './labels/campaignLabel';
 
 import { tagHandler } from './handlers/tagHandler';
 import { contactHandler } from './handlers/contactHandler';
@@ -18,7 +19,9 @@ import { optinHandler } from './handlers/optinHandler';
 import { signInFormHandler } from './handlers/signInFormHandler';
 import { globalFieldHandler } from './handlers/globalFieldHandler';
 import { optInCaseHandler } from './handlers/optInCaseHandler';
-import { getContacts, getGlobalFields, getOptInCases, getOptins, getTags } from '../GenericFunctions';
+import { campaignHandler } from './handlers/campaignHandler';
+import { getAutomationList, getContacts, getGlobalFields, getOptInCases, getOptins, getTags } from '../GenericFunctions';
+
 
 export class Fleads implements INodeType {
 	description: INodeTypeDescription = {
@@ -78,6 +81,10 @@ export class Fleads implements INodeType {
 					{
 						name: 'Opt-in-case',
 						value: 'optInCases'
+					},
+					{
+						name: 'Campaigns',
+						value: 'campaign'
 					}
 				],
 				default: 'tag',
@@ -102,6 +109,9 @@ export class Fleads implements INodeType {
 			// Opt-in-cases
 			...optInCasesOperations,
 			...optInCasesFields,
+			// Campaign
+			...campaignOperations,
+			...campaignFields,
 		]
 	};
 
@@ -116,6 +126,7 @@ export class Fleads implements INodeType {
 			//todo: add signin forms here
 			getGlobalFields,
 			getOptInCases,
+			getAutomationList
 		},
 		loadOptions: {
 			/**
@@ -158,6 +169,8 @@ export class Fleads implements INodeType {
 					responseData = await globalFieldHandler.call(this, operation, i, qs);
 				} else if (resource === 'optInCases') {
 					responseData = await optInCaseHandler.call(this, operation, i, qs);
+				} else if (resource === 'campaign') {
+					responseData = await campaignHandler.call(this, operation, i, qs);
 				}
 
 				if (Array.isArray(responseData)) {
