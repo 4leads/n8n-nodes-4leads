@@ -15,11 +15,6 @@ export async function campaignHandler(
         const automationId = this.getNodeParameter('campaignId', i) as IDataObject;
         const contactId = this.getNodeParameter('contactId', i) as IDataObject;
 
-        console.log("automationId")
-        console.log(automationId)
-        console.log("contactid")
-        console.log(contactId)
-
         if (!automationId.value) throw new Error('Campaign ID is required and cannot be empty.');
         if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.');
 

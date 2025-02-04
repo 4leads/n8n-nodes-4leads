@@ -14,6 +14,8 @@ export async function tagHandler(
 
         const tagName = this.getNodeParameter('tagName', i) as string;
 
+        if (!tagName) throw new Error('Tag name is required and cannot be empty.');
+
         const body = {
             name: tagName
         }

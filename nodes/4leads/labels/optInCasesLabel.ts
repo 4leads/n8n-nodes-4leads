@@ -121,7 +121,7 @@ export const optInCasesFields: INodeProperties[] = [
         name: 'OptInCaseContactId',
         type: 'resourceLocator',
         required: true,
-        default: { mode: 'list', value: '' },
+        default: { mode: 'id', value: '' },
         placeholder: 'Select a contact...',
         description: 'Select a contact...',
         displayOptions: {

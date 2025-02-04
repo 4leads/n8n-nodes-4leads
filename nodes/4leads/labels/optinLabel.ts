@@ -138,7 +138,7 @@ export const optinFields: INodeProperties[] = [
         displayName: 'Contact',
         name: 'optinContactId',
         type: 'resourceLocator',
-        default: { mode: 'list', value: '' },
+        default: { mode: 'id', value: '' },
         placeholder: 'Select a contact...',
         description: 'Select a contact...',
         displayOptions: {

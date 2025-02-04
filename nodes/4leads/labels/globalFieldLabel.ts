@@ -147,7 +147,7 @@ export const globalFieldFields: INodeProperties[] = [
         name: 'globalFieldContactId',
         type: 'resourceLocator',
         required: true,
-        default: { mode: 'list', value: '' },
+        default: { mode: 'id', value: '' },
         placeholder: 'Select a contact...',
         description: 'Select a contact...',
         displayOptions: {

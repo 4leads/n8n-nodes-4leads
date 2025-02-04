@@ -33,23 +33,23 @@ export async function optInCaseHandler(
     } else if (operation === 'grant' || operation === 'revoke') {
 
         const optInCaseId = this.getNodeParameter('optInCaseId', i) as IDataObject;
-
+    
         if (!optInCaseId.value) throw new Error('Opt-In-Case ID is required and cannot be empty.');
-
+    
         const contactId = this.getNodeParameter('OptInCaseContactId', i) as IDataObject;
-
+    
         if (!contactId.value) throw new Error('Contact ID is required and cannot be empty.');
-
+    
         const optInCaseAdditionalFields = this.getNodeParameter('optInCaseAdditionalFields', i) as IDataObject;
-
+    
         const body: IDataObject = {
             contactId: contactId.value,
-        }
-
-        if (optInCaseAdditionalFields.optInCaseIp) body.ip = optInCaseAdditionalFields.optInCaseIp
-
-        const operationEndpoint = operation === 'grant' ? '/grant' : '/revoke';
-
+        };
+    
+        if (optInCaseAdditionalFields.optInCaseIp) body.ip = optInCaseAdditionalFields.optInCaseIp;
+    
+        const operationEndpoint = operation === 'grant' ? 'grant' : 'revoke';
+        
         responseData = await fourLeadsApiRequest.call(this, 'POST', `${endpoint}/${optInCaseId.value}/${operationEndpoint}`, body);
 
     } else {

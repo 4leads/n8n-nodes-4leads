@@ -26,7 +26,7 @@ export async function fourLeadsApiRequest(
     if (Object.keys(body).length === 0) {
         delete options.body;
     }
-
+    
     // Make request
     let responseData: IDataObject | undefined;
 
@@ -55,230 +55,65 @@ export async function fourLeadsApiRequest(
     }
 }
 
-export async function getTags(
-    this: ILoadOptionsFunctions,
+export async function getList(
+    context: ILoadOptionsFunctions,
+    endpoint: string,
     filter?: string,
+    mapFunction?: (item: any) => INodeListSearchItems
 ): Promise<INodeListSearchResult> {
-    const response = await fourLeadsApiRequest.call(this, 'GET', 'tags');
+    const response = await fourLeadsApiRequest.call(context, 'GET', endpoint);
+    const items = response?.data?.results;
 
-    const tags = response?.data?.results;
-
-    if (!Array.isArray(tags)) {
+    if (!Array.isArray(items)) {
         return { results: [] };
     }
 
-    const results: INodeListSearchItems[] = tags
-        .map((tag) => ({
-            name: tag.name,
-            value: tag.id,
-        }))
+    const results: INodeListSearchItems[] = items
+        .map(mapFunction || ((item) => ({ name: item.name, value: item.id })))
         .filter(
-            (tag) =>
+            (item) =>
                 !filter ||
-                tag.name.toLowerCase().includes(filter.toLowerCase()) ||
-                tag.value?.toString() === filter,
+                item.name.toLowerCase().includes(filter.toLowerCase()) ||
+                item.value?.toString() === filter,
         )
-        .sort((a, b) => {
-            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-            return 0;
-        });
+        .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
 
     return { results };
 }
 
-export async function getContacts(
-    this: ILoadOptionsFunctions,
-    filter?: string,
-): Promise<INodeListSearchResult> {
-    const response = await fourLeadsApiRequest.call(this, 'GET', 'contacts');
-
-    const contacts = response?.data?.results;
-
-    if (!Array.isArray(contacts)) {
-        return { results: [] };
-    }
-
-    const results: INodeListSearchItems[] = contacts
-        .map((contact) => ({
-            name: (contact.fname || contact.lname)
-                ? `${contact.fname || ''} ${contact.lname || ''}`.trim()
-                : contact.email || 'No Name', // Fallback: if no name is set, display email instead
-            value: contact.id,
-        }))
-        .filter(
-            (contact) =>
-                !filter ||
-                contact.name.toLowerCase().includes(filter.toLowerCase()) ||
-                contact.value?.toString() === filter,
-        )
-        .sort((a, b) => {
-            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-            return 0;
-        });
-
-    return { results };
+export async function getTags(this: ILoadOptionsFunctions, filter?: string): Promise<INodeListSearchResult> {
+    return await getList(this, 'tags', filter);
 }
 
-export async function getOptins(
-    this: ILoadOptionsFunctions,
-    filter?: string,
-): Promise<INodeListSearchResult> {
-    const response = await fourLeadsApiRequest.call(this, 'GET', 'opt-ins');
-
-    const optins = response?.data?.results;
-
-    if (!Array.isArray(optins)) {
-        return { results: [] };
-    }
-
-    const results: INodeListSearchItems[] = optins
-        .map((optin) => ({
-            name: optin.name,
-            value: optin.id,
-        }))
-        .filter(
-            (optin) =>
-                !filter ||
-                optin.name.toLowerCase().includes(filter.toLowerCase()) ||
-                optin.value?.toString() === filter,
-        )
-        .sort((a, b) => {
-            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-            return 0;
-        });
-
-    return { results };
+export async function getContacts(this: ILoadOptionsFunctions, filter?: string): Promise<INodeListSearchResult> {
+    return await getList(this, 'contacts', filter, (contact) => ({
+        name: (contact.fname || contact.lname)
+            ? `${contact.fname || ''} ${contact.lname || ''}`.trim()
+            : contact.email || 'No Name', // Fallback: If no name is set, display email instead
+        value: contact.id,
+    }));
 }
 
-export async function getGlobalFields(
-    this: ILoadOptionsFunctions,
-    filter?: string,
-): Promise<INodeListSearchResult> {
-    const response = await fourLeadsApiRequest.call(this, 'GET', 'globalFields');
-
-    const globalfields = response?.data?.results;
-
-    if (!Array.isArray(globalfields)) {
-        return { results: [] };
-    }
-
-    const results: INodeListSearchItems[] = globalfields
-        .map((globalfield) => ({
-            name: globalfield.name,
-            value: globalfield.id,
-        }))
-        .filter(
-            (globalfield) =>
-                !filter ||
-                globalfield.name.toLowerCase().includes(filter.toLowerCase()) ||
-                globalfield.value?.toString() === filter,
-        )
-        .sort((a, b) => {
-            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-            return 0;
-        });
-
-    return { results };
+export async function getOptins(this: ILoadOptionsFunctions, filter?: string): Promise<INodeListSearchResult> {
+    return await getList(this, 'opt-ins', filter);
 }
 
-export async function getOptInCases(
-    this: ILoadOptionsFunctions,
-    filter?: string,
-): Promise<INodeListSearchResult> {
-    const response = await fourLeadsApiRequest.call(this, 'GET', 'opt-in-cases');
-
-    const optInCases = response?.data?.results;
-
-    if (!Array.isArray(optInCases)) {
-        return { results: [] };
-    }
-
-    const results: INodeListSearchItems[] = optInCases
-        .map((optInCase) => ({
-            name: optInCase.name,
-            value: optInCase.id,
-        }))
-        .filter(
-            (optInCase) =>
-                !filter ||
-                optInCase.name.toLowerCase().includes(filter.toLowerCase()) ||
-                optInCase.value?.toString() === filter,
-        )
-        .sort((a, b) => {
-            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-            return 0;
-        });
-
-    return { results };
+export async function getSignIns(this: ILoadOptionsFunctions, filter?: string): Promise<INodeListSearchResult> {
+    return await getList(this, 'campaigns', filter);
 }
 
-export async function getAutomationList(
-    this: ILoadOptionsFunctions,
-    filter?: string,
-): Promise<INodeListSearchResult> {
-    const response = await fourLeadsApiRequest.call(this, 'GET', 'automations/trigger/n8n');
-    
-    const automations = response?.data?.results;
-
-    if (!Array.isArray(automations)) {
-        return { results: [] };
-    }
-
-    const results: INodeListSearchItems[] = automations
-        .map((automation) => ({
-            name: automation.name,
-            value: automation.id,
-        }))
-        .filter(
-            (automation) =>
-                !filter ||
-                automation.name.toLowerCase().includes(filter.toLowerCase()) ||
-                automation.value?.toString() === filter,
-        )
-        .sort((a, b) => {
-            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-            return 0;
-        });
-
-    return { results };
+export async function getGlobalFields(this: ILoadOptionsFunctions, filter?: string): Promise<INodeListSearchResult> {
+    return await getList(this, 'globalFields', filter);
 }
 
-export async function getActionList(
-    this: ILoadOptionsFunctions,
-    filter?: string,
-): Promise<INodeListSearchResult> {
-    const response = await fourLeadsApiRequest.call(this, 'GET', 'automations/toggle/n8n');
-    
-    const actions = response?.data?.results;
+export async function getOptInCases(this: ILoadOptionsFunctions, filter?: string): Promise<INodeListSearchResult> {
+    return await getList(this, 'opt-in-cases', filter);
+}
 
-    if (!Array.isArray(actions)) {
-        return { results: [] };
-    }
+export async function getAutomationList(this: ILoadOptionsFunctions, filter?: string): Promise<INodeListSearchResult> {
+    return await getList(this, 'automations/trigger/n8n', filter);
+}
 
-    console.log(actions)
-
-    const results: INodeListSearchItems[] = actions
-        .map((action) => ({
-            name: action.name,
-            value: action.id,
-        }))
-        .filter(
-            (action) =>
-                !filter ||
-                action.name.toLowerCase().includes(filter.toLowerCase()) ||
-                action.value?.toString() === filter,
-        )
-        .sort((a, b) => {
-            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-            return 0;
-        });
-
-    return { results };
+export async function getActionList(this: ILoadOptionsFunctions, filter?: string): Promise<INodeListSearchResult> {
+    return await getList(this, 'automations/toggle/n8n', filter);
 }

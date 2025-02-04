@@ -20,7 +20,7 @@ import { signInFormHandler } from './handlers/signInFormHandler';
 import { globalFieldHandler } from './handlers/globalFieldHandler';
 import { optInCaseHandler } from './handlers/optInCaseHandler';
 import { campaignHandler } from './handlers/campaignHandler';
-import { getAutomationList, getContacts, getGlobalFields, getOptInCases, getOptins, getTags } from '../GenericFunctions';
+import { getAutomationList, getContacts, getGlobalFields, getOptInCases, getOptins, getSignIns, getTags } from '../GenericFunctions';
 
 
 export class Fleads implements INodeType {
@@ -123,7 +123,7 @@ export class Fleads implements INodeType {
 			getTags,
 			getContacts,
 			getOptins,
-			//todo: add signin forms here
+			getSignIns,
 			getGlobalFields,
 			getOptInCases,
 			getAutomationList

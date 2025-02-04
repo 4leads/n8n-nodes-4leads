@@ -73,7 +73,7 @@ export const signInFormFields: INodeProperties[] = [
                 type: 'list',
                 placeholder: 'Select a sign in form...',
                 typeOptions: {
-                    searchListMethod: 'getGlobalFields',
+                    searchListMethod: 'getSignIns',
                     searchable: true,
                 },
             },
@@ -114,7 +114,7 @@ export const signInFormFields: INodeProperties[] = [
                 type: 'list',
                 placeholder: 'Select a sign in form...',
                 typeOptions: {
-                    searchListMethod: 'getGlobalFields',
+                    searchListMethod: 'getSignIns',
                     searchable: true,
                 },
             },
@@ -180,7 +180,7 @@ export const signInFormFields: INodeProperties[] = [
         name: 'signInFormContactId',
         type: 'resourceLocator',
         required: true,
-        default: { mode: 'list', value: '' },
+        default: { mode: 'id', value: '' },
         placeholder: 'Select a contact...',
         description: 'Select a contact...',
         displayOptions: {
