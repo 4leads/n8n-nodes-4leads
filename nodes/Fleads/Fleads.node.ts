@@ -3,7 +3,7 @@ import {
 	ILoadOptionsFunctions,
 	INodePropertyOptions
 } from 'n8n-workflow';
-import { IExecuteFunctions, NodeConnectionType } from 'n8n-workflow';
+import { IExecuteFunctions } from 'n8n-workflow';
 
 import { tagFields, tagOperations } from './labels/tagLabel';
 import { contactFields, contactOperations } from './labels/contactLabel';
@@ -35,11 +35,11 @@ export class Fleads implements INodeType {
 		defaults: {
 			name: '4leads',
 		},
-		inputs: [NodeConnectionType.Main],
-		outputs: [NodeConnectionType.Main],
+		inputs: ['main'],
+		outputs: ['main'],
 		credentials: [
 			{
-				name: 'FleadsApi',
+				name: 'fleadsApi',
 				required: true,
 			},
 		],

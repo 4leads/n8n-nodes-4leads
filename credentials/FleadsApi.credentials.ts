@@ -5,7 +5,7 @@ import {
 } from 'n8n-workflow';
 
 export class FleadsApi implements ICredentialType {
-	name = 'FleadsApi';
+	name = 'fleadsApi';
 	displayName = '4leads API';
 	documentationUrl = 'https://4leadsv1.docs.apiary.io/#introduction/getting-started';
 	properties: INodeProperties[] = [

@@ -1,5 +1,5 @@
 import type { IDataObject, INodeExecutionData, INodeType, INodeTypeDescription, IPollFunctions } from 'n8n-workflow';
-import { NodeConnectionType, NodeOperationError } from 'n8n-workflow';
+import { NodeOperationError } from 'n8n-workflow';
 import { getActionList } from '../GenericFunctions';
 
 export class FleadsTrigger implements INodeType {
@@ -14,11 +14,11 @@ export class FleadsTrigger implements INodeType {
         defaults: {
             name: '4leads trigger',
         },
-        inputs: [NodeConnectionType.Main],
-        outputs: [NodeConnectionType.Main],
+        inputs: [],
+        outputs: ['main'],
         credentials: [
             {
-                name: 'FleadsApi',
+                name: 'fleadsApi',
                 required: true,
             },
         ],
@@ -80,7 +80,7 @@ export class FleadsTrigger implements INodeType {
         }
     
         if (triggerOn === 'eventCampaign') {
-            const credentials = await this.getCredentials('FleadsApi');
+            const credentials = await this.getCredentials('fleadsApi');
     
             if (!credentials) {
                 throw new NodeOperationError(this.getNode(), 'No API credentials found.');

@@ -31,7 +31,7 @@ export async function fourLeadsApiRequest(
     let responseData: IDataObject | undefined;
 
     try {
-        const credentials = await this.getCredentials('FleadsApi');
+        const credentials = await this.getCredentials('fleadsApi');
 
         if (credentials === undefined) {
             throw new NodeOperationError(this.getNode(), 'No credentials found.');

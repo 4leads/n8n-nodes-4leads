@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-4leads",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "description": "4leads Node for N8N",
   "keywords": [
     "n8n-community-node-package"
@@ -39,7 +39,7 @@
       "dist/credentials/FleadsApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Fleads/Fleads.node.js",
+      "dist/nodes/leads/Fleads.node.js",
       "dist/nodes/FleadsTrigger/FleadsTrigger.node.js"
     ]
   },
