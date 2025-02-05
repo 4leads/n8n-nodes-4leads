@@ -26,7 +26,7 @@ import { getAutomationList, getContacts, getGlobalFields, getOptInCases, getOpti
 export class Fleads implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: '4leads',
-		name: 'Fleads',
+		name: 'fleads',
 		icon: 'file:../fleads.svg',
 		group: ['transform'],
 		version: 1,
@@ -59,59 +59,57 @@ export class Fleads implements INodeType {
 				type: 'options',
 				options: [
 					{
-						name: 'Tag',
-						value: 'tag',
+						name: 'Campaign',
+						value: 'campaign'
 					},
 					{
 						name: 'Contact',
-						value: 'contact',
-					},
-					{
-						name: 'Opt-in',
-						value: 'optin'
-					},
-					{
-						name: 'Sign in form',
-						value: 'signInForm'
+						value: 'contact'
 					},
 					{
 						name: 'Global Field',
 						value: 'globalField'
 					},
 					{
-						name: 'Opt-in-case',
+						name: 'Opt-In',
+						value: 'optin'
+					},
+					{
+						name: 'Opt-in-Case',
 						value: 'optInCases'
 					},
 					{
-						name: 'Campaigns',
-						value: 'campaign'
+						name: 'Sign in Form',
+						value: 'signInForm'
+					},
+					{
+						name: 'Tag',
+						value: 'tag'
 					}
 				],
-				default: 'tag',
-				description: 'The resource to operate on. ',
+				default: 'campaign',
 			},
-
-			// Tags
-			...tagOperations,
-			...tagFields,
+			// Campaign
+			...campaignOperations,
+			...campaignFields,
 			// Contacts
 			...contactOperations,
 			...contactFields,
-			// Opt-ins
-			...optinOperations,
-			...optinFields,
-			// Sign in form
-			...signInFormOperations,
-			...signInFormFields,
 			// Global fields
 			...globalFieldOperations,
 			...globalFieldFields,
 			// Opt-in-cases
 			...optInCasesOperations,
 			...optInCasesFields,
-			// Campaign
-			...campaignOperations,
-			...campaignFields,
+			// Opt-ins
+			...optinOperations,
+			...optinFields,
+			// Sign in form
+			...signInFormOperations,
+			...signInFormFields,
+			// Tags
+			...tagOperations,
+			...tagFields,
 		]
 	};
 

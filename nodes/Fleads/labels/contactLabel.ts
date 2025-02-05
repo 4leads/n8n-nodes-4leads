@@ -256,29 +256,34 @@ export const contactOperations: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Create',
-                value: 'create',
-                action: 'Create a New Contact',
+                name: 'Add a Tag',
+                value: 'addATag',
+                action: 'Add tags',
             },
             {
-                name: 'Update',
-                value: 'update',
-                action: 'Update a Contact',
+                name: 'Create',
+                value: 'create',
+                action: 'Create a new contact',
             },
             {
                 name: 'Delete',
                 value: 'delete',
-                action: 'Delete a Contact',
+                action: 'Delete a contact',
             },
             {
                 name: 'Get',
                 value: 'get',
-                action: 'List Contact',
+                action: 'List contact',
             },
             {
-                name: 'Add a Tag',
-                value: 'addATag',
-                action: 'Add tags',
+                name: 'Get Field List',
+                value: 'getContactFieldList',
+                action: 'Get contact fieldlist',
+            },
+            {
+                name: 'Get Tag List',
+                value: 'getContactTagList',
+                action: 'Get contact taglist',
             },
             {
                 name: 'Remove a Tag',
@@ -286,16 +291,12 @@ export const contactOperations: INodeProperties[] = [
                 action: 'Remove tags',
             },
             {
-                name: 'Get tag list',
-                value: 'getContactTagList',
-                action: 'Get Contact Taglist',
-            },
-            {
-                name: 'Get field list',
-                value: 'getContactFieldList',
-                action: 'Get Contact Fieldlist',
-            },
+                name: 'Update',
+                value: 'update',
+                action: 'Update a contact',
+            }
         ],
+
         default: 'create',
     },
 ];
@@ -310,7 +311,7 @@ export const contactFields: INodeProperties[] = [
         name: 'contactFirstname',
         type: 'string',
         default: '',
-        required: false,
+
         displayOptions: {
             show: {
                 resource: ['contact'],
@@ -325,7 +326,7 @@ export const contactFields: INodeProperties[] = [
         name: 'contactLastname',
         type: 'string',
         default: '',
-        required: false,
+
         displayOptions: {
             show: {
                 resource: ['contact'],
@@ -355,7 +356,7 @@ export const contactFields: INodeProperties[] = [
         name: 'contactMobile',
         type: 'string',
         default: '',
-        required: false,
+
         displayOptions: {
             show: {
                 resource: ['contact'],
@@ -377,7 +378,7 @@ export const contactFields: INodeProperties[] = [
         required: true,
         default: { mode: 'id', value: '' },
         placeholder: 'Select a contact...',
-        description: 'Select a contact...',
+        description: 'Select a contact',
         displayOptions: {
             show: {
                 resource: ['contact'],
@@ -439,7 +440,7 @@ export const contactFields: INodeProperties[] = [
                 name: 'contactSalutation',
                 type: 'options',
                 default: 'm',
-                description: 'Select the salutation for the contact.',
+                description: 'Select the salutation for the contact',
                 options: [
                     {
                         name: 'Herr',
@@ -460,35 +461,35 @@ export const contactFields: INodeProperties[] = [
                 name: 'contactCompany',
                 type: 'string',
                 default: '',
-                description: 'Select the company for the contact.',
+                description: 'Select the company for the contact',
             },
             {
-                displayName: 'Phone number',
+                displayName: 'Phone Number',
                 name: 'contactPhoneNumber',
                 type: 'string',
                 default: '',
-                description: 'Select the phone number for the contact.',
+                description: 'Select the phone number for the contact',
             },
             {
                 displayName: 'Birthday',
                 name: 'contactBirthday',
                 type: 'dateTime',
                 default: '',
-                description: 'Select the birthday for the contact.',
+                description: 'Select the birthday for the contact',
             },
             {
                 displayName: 'Position (Company)',
                 name: 'contactPosition',
                 type: 'string',
                 default: '',
-                description: 'Select the position for the contact.',
+                description: 'Select the position for the contact',
             },
             {
                 displayName: 'Country',
                 name: 'contactCountry',
                 type: 'options',
                 default: '',
-                description: 'Select the country for the contact.',
+                description: 'Select the country for the contact',
                 options: countryOptions,
             },
             {
@@ -496,49 +497,49 @@ export const contactFields: INodeProperties[] = [
                 name: 'contactStreet',
                 type: 'string',
                 default: '',
-                description: 'Select the street for the contact.',
+                description: 'Select the street for the contact',
             },
             {
-                displayName: 'Street number',
+                displayName: 'Street Number',
                 name: 'contactHouseNumber',
                 type: 'string',
                 default: '',
-                description: 'Select the street number for the contact.',
+                description: 'Select the street number for the contact',
             },
             {
                 displayName: 'ZIP Code',
                 name: 'contactZip',
                 type: 'string',
                 default: '',
-                description: 'Select the zip code for the contact.',
+                description: 'Select the zip code for the contact',
             },
             {
                 displayName: 'City',
                 name: 'contactCity',
                 type: 'string',
                 default: '',
-                description: 'Select the city for the contact.',
+                description: 'Select the city for the contact',
             },
             {
                 displayName: 'Fax',
                 name: 'contactFax',
                 type: 'string',
                 default: '',
-                description: 'Select the fax for the contact.',
+                description: 'Select the fax for the contact',
             },
             {
                 displayName: 'Website',
                 name: 'contactWebsite',
                 type: 'string',
                 default: '',
-                description: 'Select the website for the contact.',
+                description: 'Select the website for the contact',
             },
             {
                 displayName: 'Skype',
                 name: 'contactSkype',
                 type: 'string',
                 default: '',
-                description: 'Select the skype for the contact.',
+                description: 'Select the skype for the contact',
             },
         ],
     },
@@ -599,7 +600,7 @@ export const contactFields: INodeProperties[] = [
                 name: 'contactSalutation',
                 type: 'options',
                 default: 'm',
-                description: 'Select the salutation for the contact.',
+                description: 'Select the salutation for the contact',
                 options: [
                     {
                         name: 'Herr',
@@ -620,35 +621,35 @@ export const contactFields: INodeProperties[] = [
                 name: 'contactCompany',
                 type: 'string',
                 default: '',
-                description: 'Select the company for the contact.',
+                description: 'Select the company for the contact',
             },
             {
-                displayName: 'Phone number',
+                displayName: 'Phone Number',
                 name: 'contactPhoneNumber',
                 type: 'string',
                 default: '',
-                description: 'Select the phone number for the contact.',
+                description: 'Select the phone number for the contact',
             },
             {
                 displayName: 'Birthday',
                 name: 'contactBirthday',
                 type: 'dateTime',
                 default: '',
-                description: 'Select the birthday for the contact.',
+                description: 'Select the birthday for the contact',
             },
             {
                 displayName: 'Position (Company)',
                 name: 'contactPosition',
                 type: 'string',
                 default: '',
-                description: 'Select the position for the contact.',
+                description: 'Select the position for the contact',
             },
             {
                 displayName: 'Country',
                 name: 'contactCountry',
                 type: 'options',
                 default: '',
-                description: 'Select the country for the contact.',
+                description: 'Select the country for the contact',
                 options: countryOptions,
             },
             {
@@ -656,49 +657,49 @@ export const contactFields: INodeProperties[] = [
                 name: 'contactStreet',
                 type: 'string',
                 default: '',
-                description: 'Select the street for the contact.',
+                description: 'Select the street for the contact',
             },
             {
-                displayName: 'Street number',
+                displayName: 'Street Number',
                 name: 'contactHouseNumber',
                 type: 'string',
                 default: '',
-                description: 'Select the street number for the contact.',
+                description: 'Select the street number for the contact',
             },
             {
                 displayName: 'ZIP Code',
                 name: 'contactZip',
                 type: 'string',
                 default: '',
-                description: 'Select the zip code for the contact.',
+                description: 'Select the zip code for the contact',
             },
             {
                 displayName: 'City',
                 name: 'contactCity',
                 type: 'string',
                 default: '',
-                description: 'Select the city for the contact.',
+                description: 'Select the city for the contact',
             },
             {
                 displayName: 'Fax',
                 name: 'contactFax',
                 type: 'string',
                 default: '',
-                description: 'Select the fax for the contact.',
+                description: 'Select the fax for the contact',
             },
             {
                 displayName: 'Website',
                 name: 'contactWebsite',
                 type: 'string',
                 default: '',
-                description: 'Select the website for the contact.',
+                description: 'Select the website for the contact',
             },
             {
                 displayName: 'Skype',
                 name: 'contactSkype',
                 type: 'string',
                 default: '',
-                description: 'Select the skype for the contact.',
+                description: 'Select the skype for the contact',
             },
         ],
     },
@@ -712,7 +713,7 @@ export const contactFields: INodeProperties[] = [
         required: true,
         default: { mode: 'id', value: '' },
         placeholder: 'Select a contact...',
-        description: 'Select a contact...',
+        description: 'Select a contact',
         displayOptions: {
             show: {
                 resource: ['contact'],
@@ -748,7 +749,7 @@ export const contactFields: INodeProperties[] = [
         ],
     },
     {
-        displayName: 'Return everything',
+        displayName: 'Return Everything',
         name: 'bReturnAll',
         type: 'boolean',
         displayOptions: {
@@ -758,7 +759,7 @@ export const contactFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Enable this option to return everything.',
+        description: 'Whether everything should be returned',
     },
     {
         displayName: 'Additional Fields',
@@ -779,21 +780,21 @@ export const contactFields: INodeProperties[] = [
         },
         options: [
             {
-                displayName: 'Search string',
+                displayName: 'Search String',
                 name: 'contactSearchString',
                 type: 'string',
                 default: '',
                 description: 'This parameter is used to specify the text you want to search for within the name fields. For example, if you\'re looking for names containing "@muster.de", you would enter this value in the searchString parameter.',
             },
             {
-                displayName: 'Page size',
+                displayName: 'Page Size',
                 name: 'contactPageSize',
                 type: 'number',
                 default: '',
                 description: 'This parameter defines the number of results to display per page. You can specify values like 5, 10, 20, 50, or 200, depending on how many results you want to be shown per page in the response.',
             },
             {
-                displayName: 'Page number',
+                displayName: 'Page Number',
                 name: 'contactPageNum',
                 type: 'number',
                 default: '',
@@ -805,7 +806,7 @@ export const contactFields: INodeProperties[] = [
     //       contact: addATag, removeATag
     // ----------------------------------------
     {
-        displayName: 'Edit a list of tags',
+        displayName: 'Edit a List of Tags',
         name: 'bListOfTags',
         type: 'boolean',
         displayOptions: {
@@ -815,15 +816,15 @@ export const contactFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Enable this option to provide a list of tags to add or remove from a contact.',
+        description: 'Whether to provide a list of tags to add or remove from a contact when enabled',
     },
     {
-        displayName: 'Tags',
+        displayName: 'Tag Names or IDs',
         name: 'contactTagIdList',
         type: 'multiOptions',
         default: [],
         placeholder: 'Select one or more tags...',
-        description: 'Select one or more tags from the list.',
+        description: 'Select one or more tags from the list. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
         displayOptions: {
             show: {
                 resource: ['contact'],
@@ -841,7 +842,7 @@ export const contactFields: INodeProperties[] = [
         type: 'resourceLocator',
         default: { mode: 'list', value: '' },
         placeholder: 'Select a tag...',
-        description: 'Select a tag...',
+        description: 'Select a tag',
         displayOptions: {
             show: {
                 resource: ['contact'],

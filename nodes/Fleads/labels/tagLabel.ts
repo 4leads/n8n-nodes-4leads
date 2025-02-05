@@ -15,22 +15,22 @@ export const tagOperations: INodeProperties[] = [
 			{
 				name: 'Create',
 				value: 'create',
-				action: 'Create a New Tag',
+				action: 'Create a new tag',
 			},
 			{
 				name: 'Update',
 				value: 'update',
-				action: 'Update a Tag',
+				action: 'Update a tag',
 			},
 			{
 				name: 'Delete',
 				value: 'delete',
-				action: 'Delete a Tag',
+				action: 'Delete a tag',
 			},
 			{
 				name: 'Get',
 				value: 'get',
-				action: 'List Tags',
+				action: 'List tags',
 			},
 		],
 		default: 'create',
@@ -54,7 +54,7 @@ export const tagFields: INodeProperties[] = [
 			},
 		},
 		placeholder: 'Tag name',
-		description: 'Specifies the name of the tag to be created.',
+		description: 'Specifies the name of the tag to be created',
 	},
 	// ----------------------------------------
     //             tag: update, get, delete
@@ -66,7 +66,7 @@ export const tagFields: INodeProperties[] = [
 		required: true,
 		default: { mode: 'list', value: '' },
 		placeholder: 'Select a tag...',
-		description: 'Select a tag...',
+		description: 'Select a tag',
 		displayOptions: {
 			show: {
 				resource: ['tag'],
@@ -104,7 +104,7 @@ export const tagFields: INodeProperties[] = [
     //             tag: get
     // ----------------------------------------
     {
-        displayName: 'Return everything',
+        displayName: 'Return Everything',
         name: 'bReturnAll',
         type: 'boolean',
         displayOptions: {
@@ -114,7 +114,7 @@ export const tagFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Enable this option to return everything.',
+        description: 'Whether everything should be returned',
     },
 	{
 		displayName: 'Tag',
@@ -123,7 +123,7 @@ export const tagFields: INodeProperties[] = [
 		required: true,
 		default: { mode: 'list', value: '' },
 		placeholder: 'Select a tag...',
-		description: 'Select a tag...',
+		description: 'Select a tag',
 		displayOptions: {
 			show: {
 				resource: ['tag'],
@@ -177,21 +177,21 @@ export const tagFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				displayName: 'Search string',
+				displayName: 'Search String',
 				name: 'tagSearchString',
 				type: 'string',
 				default: '',
 				description: 'This parameter is used to specify the text you want to search for within the name fields. For example, if you\'re looking for names containing "@muster.de", you would enter this value in the searchString parameter.',
 			},
 			{
-				displayName: 'Page size',
+				displayName: 'Page Size',
 				name: 'tagPageSize',
 				type: 'string',
 				default: '',
 				description: 'This parameter defines the number of results to display per page. You can specify values like 5, 10, 20, 50, or 200, depending on how many results you want to be shown per page in the response.',
 			},
 			{
-				displayName: 'Page number',
+				displayName: 'Page Number',
 				name: 'tagPageNum',
 				type: 'string',
 				default: '',
@@ -224,14 +224,14 @@ export const tagFields: INodeProperties[] = [
 				name: 'updatedTagName',
 				type: 'string',
 				default: '',
-				description: 'Enter the new name for the tag.',
+				description: 'Enter the new name for the tag',
 			},
 			{
 				displayName: 'Description',
 				name: 'updatedTagDescription',
 				type: 'string',
 				default: '',
-				description: 'Enter the new description for the tag.',
+				description: 'Enter the new description for the tag',
 			},
 		],
 	},

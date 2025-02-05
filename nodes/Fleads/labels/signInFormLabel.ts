@@ -15,22 +15,22 @@ export const signInFormOperations: INodeProperties[] = [
             {
                 name: 'Get',
                 value: 'get',
-                action: 'List Sign in forms',
+                action: 'List sign in forms',
             },
             {
                 name: 'Delete',
                 value: 'delete',
-                action: 'Delete Sign in form',
+                action: 'Delete sign in form',
             },
             {
                 name: 'Start',
                 value: 'start',
-                action: 'Start Sign in form',
+                action: 'Start sign in form',
             },
             {
                 name: 'Stop',
                 value: 'stop',
-                action: 'Stop Sign in form',
+                action: 'Stop sign in form',
             },
         ],
         default: 'get',
@@ -39,7 +39,7 @@ export const signInFormOperations: INodeProperties[] = [
 
 export const signInFormFields: INodeProperties[] = [
     {
-        displayName: 'Return everything',
+        displayName: 'Return Everything',
         name: 'bReturnAll',
         type: 'boolean',
         displayOptions: {
@@ -49,16 +49,16 @@ export const signInFormFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Enable this option to return everything.',
+        description: 'Whether everything should be returned',
     },
     {
-        displayName: 'Sign in form',
+        displayName: 'Sign in Form',
         name: 'signInFormId',
         type: 'resourceLocator',
         required: true,
         default: { mode: 'list', value: '' },
         placeholder: 'Select a sign in form...',
-        description: 'Select a sign in form...',
+        description: 'Select a sign in form',
         displayOptions: {
             show: {
                 resource: ['signInForm'],
@@ -94,13 +94,13 @@ export const signInFormFields: INodeProperties[] = [
         ],
     },
     {
-        displayName: 'Sign in form',
+        displayName: 'Sign in Form',
         name: 'signInFormId',
         type: 'resourceLocator',
         required: true,
         default: { mode: 'list', value: '' },
         placeholder: 'Select a sign in form...',
-        description: 'Select a sign in form...',
+        description: 'Select a sign in form',
         displayOptions: {
             show: {
                 resource: ['signInForm'],
@@ -153,21 +153,21 @@ export const signInFormFields: INodeProperties[] = [
         },
         options: [
             {
-                displayName: 'Search string',
+                displayName: 'Search String',
                 name: 'signInFormSearchString',
                 type: 'string',
                 default: '',
                 description: 'This parameter is used to specify the text you want to search for within the name fields. For example, if you\'re looking for names containing "@muster.de", you would enter this value in the searchString parameter.',
             },
             {
-                displayName: 'Page size',
+                displayName: 'Page Size',
                 name: 'signInFormPageSize',
                 type: 'number',
                 default: '',
                 description: 'This parameter defines the number of results to display per page. You can specify values like 5, 10, 20, 50, or 200, depending on how many results you want to be shown per page in the response.',
             },
             {
-                displayName: 'Page number',
+                displayName: 'Page Number',
                 name: 'signInFormPageNum',
                 type: 'number',
                 default: '',
@@ -182,7 +182,7 @@ export const signInFormFields: INodeProperties[] = [
         required: true,
         default: { mode: 'id', value: '' },
         placeholder: 'Select a contact...',
-        description: 'Select a contact...',
+        description: 'Select a contact',
         displayOptions: {
             show: {
                 resource: ['signInForm'],

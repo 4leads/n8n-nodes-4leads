@@ -15,17 +15,17 @@ export const globalFieldOperations: INodeProperties[] = [
             {
                 name: 'Get',
                 value: 'get',
-                action: 'List GlobalFields',
+                action: 'List global fields',
             },
             {
-                name: 'Get value',
+                name: 'Get Value',
                 value: 'getValue',
-                action: 'Get GlobalField Value',
+                action: 'Get global field value',
             },
             {
-                name: 'Set value',
+                name: 'Set Value',
                 value: 'setValue',
-                action: 'Set GlobalField Value',
+                action: 'Set global field value',
             },
         ],
         default: 'get',
@@ -34,7 +34,7 @@ export const globalFieldOperations: INodeProperties[] = [
 
 export const globalFieldFields: INodeProperties[] = [
     {
-        displayName: 'Return everything',
+        displayName: 'Return Everything',
         name: 'bReturnAll',
         type: 'boolean',
         displayOptions: {
@@ -44,7 +44,7 @@ export const globalFieldFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Enable this option to return everything.',
+        description: "Whether everything should be returned",
     },
     {
         displayName: 'Set Multiple Fields',
@@ -57,57 +57,57 @@ export const globalFieldFields: INodeProperties[] = [
                 operation: ['setValue'],
             },
         },
-        description: 'Enable this option to set multiple fields at once.',
+        description: 'Whether to enable this option to set multiple fields at once',
     },
     {
-		displayName: 'Global field',
-		name: 'globalFieldId',
-		type: 'resourceLocator',
+        displayName: 'Global Field',
+        name: 'globalFieldId',
+        type: 'resourceLocator',
         required: true,
-		default: { mode: 'list', value: '' },
-		placeholder: 'Select a global field...',
-		description: 'Select a global field...',
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a global field...',
+        description: 'Select a global field',
         displayOptions: {
             show: {
                 resource: ['globalField'],
                 operation: ['getValue'],
             },
         },
-		modes: [
-			{
-				displayName: 'From List',
-				name: 'list',
-				type: 'list',
-				placeholder: 'Select a global field...',
-				typeOptions: {
-					searchListMethod: 'getGlobalFields',
-					searchable: true,
-				},
-			},
-			{
-				displayName: 'By ID',
-				name: 'id',
-				type: 'string',
-				validation: [
-					{
-						type: 'regex',
-						properties: {
-							regex: '^[0-9]*$',
-							errorMessage: 'Not a valid global field ID',
-						},
-					},
-				],
-			},
-		],
-	},
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a global field...',
+                typeOptions: {
+                    searchListMethod: 'getGlobalFields',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid global field ID',
+                        },
+                    },
+                ],
+            },
+        ],
+    },
     {
-		displayName: 'Global field',
-		name: 'globalFieldId',
-		type: 'resourceLocator',
+        displayName: 'Global Field',
+        name: 'globalFieldId',
+        type: 'resourceLocator',
         required: true,
-		default: { mode: 'list', value: '' },
-		placeholder: 'Select a global field...',
-		description: 'Select a global field...',
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a global field...',
+        description: 'Select a global field',
         displayOptions: {
             show: {
                 resource: ['globalField'],
@@ -115,33 +115,33 @@ export const globalFieldFields: INodeProperties[] = [
                 bSetMultiFields: [false],
             },
         },
-		modes: [
-			{
-				displayName: 'From List',
-				name: 'list',
-				type: 'list',
-				placeholder: 'Select a global field...',
-				typeOptions: {
-					searchListMethod: 'getGlobalFields',
-					searchable: true,
-				},
-			},
-			{
-				displayName: 'By ID',
-				name: 'id',
-				type: 'string',
-				validation: [
-					{
-						type: 'regex',
-						properties: {
-							regex: '^[0-9]*$',
-							errorMessage: 'Not a valid global field ID',
-						},
-					},
-				],
-			},
-		],
-	},
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a global field...',
+                typeOptions: {
+                    searchListMethod: 'getGlobalFields',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid global field ID',
+                        },
+                    },
+                ],
+            },
+        ],
+    },
     {
         displayName: 'Contact',
         name: 'globalFieldContactId',
@@ -149,7 +149,7 @@ export const globalFieldFields: INodeProperties[] = [
         required: true,
         default: { mode: 'id', value: '' },
         placeholder: 'Select a contact...',
-        description: 'Select a contact...',
+        description: 'Select a contact',
         displayOptions: {
             show: {
                 resource: ['globalField'],
@@ -184,13 +184,13 @@ export const globalFieldFields: INodeProperties[] = [
         ],
     },
     {
-		displayName: 'Global field',
-		name: 'globalFieldId',
-		type: 'resourceLocator',
+        displayName: 'Global Field',
+        name: 'globalFieldId',
+        type: 'resourceLocator',
         required: true,
-		default: { mode: 'list', value: '' },
-		placeholder: 'Select a global field...',
-		description: 'Select a global field...',
+        default: { mode: 'list', value: '' },
+        placeholder: 'Select a global field...',
+        description: 'Select a global field',
         displayOptions: {
             show: {
                 resource: ['globalField'],
@@ -198,35 +198,35 @@ export const globalFieldFields: INodeProperties[] = [
                 bReturnAll: [false],
             },
         },
-		modes: [
-			{
-				displayName: 'From List',
-				name: 'list',
-				type: 'list',
-				placeholder: 'Select a global field...',
-				typeOptions: {
-					searchListMethod: 'getGlobalFields',
-					searchable: true,
-				},
-			},
-			{
-				displayName: 'By ID',
-				name: 'id',
-				type: 'string',
-				validation: [
-					{
-						type: 'regex',
-						properties: {
-							regex: '^[0-9]*$',
-							errorMessage: 'Not a valid global field ID',
-						},
-					},
-				],
-			},
-		],
-	},
+        modes: [
+            {
+                displayName: 'From List',
+                name: 'list',
+                type: 'list',
+                placeholder: 'Select a global field...',
+                typeOptions: {
+                    searchListMethod: 'getGlobalFields',
+                    searchable: true,
+                },
+            },
+            {
+                displayName: 'By ID',
+                name: 'id',
+                type: 'string',
+                validation: [
+                    {
+                        type: 'regex',
+                        properties: {
+                            regex: '^[0-9]*$',
+                            errorMessage: 'Not a valid global field ID',
+                        },
+                    },
+                ],
+            },
+        ],
+    },
     {
-        displayName: 'Fields to Set (max. 20)',
+        displayName: 'Fields to Set (Max. 20)',
         name: 'fieldsToSet',
         type: 'fixedCollection',
         placeholder: 'Add Field',
@@ -247,13 +247,13 @@ export const globalFieldFields: INodeProperties[] = [
                 displayName: 'Field',
                 values: [
                     {
-                        displayName: 'Global field',
+                        displayName: 'Global Field',
                         name: 'globalFieldId',
                         type: 'resourceLocator',
                         required: true,
                         default: { mode: 'list', value: '' },
                         placeholder: 'Select a global field...',
-                        description: 'Select a global field...',
+                        description: 'Select a global field',
                         modes: [
                             {
                                 displayName: 'From List',
@@ -287,21 +287,21 @@ export const globalFieldFields: INodeProperties[] = [
                         type: 'string',
                         required: true,
                         default: '',
-                        description: 'The value to set for this field.',
+                        description: 'Whether to set this value for the field',
                     },
                     {
                         displayName: 'Do Triggers',
                         name: 'doTriggers',
                         type: 'boolean',
                         default: false,
-                        description: 'Enable or disable triggers for this field.',
+                        description: 'Whether to enable or disable triggers for this field',
                     },
                     {
                         displayName: 'Overwrite',
                         name: 'overwrite',
                         type: 'boolean',
                         default: false,
-                        description: 'Enable or disable overwriting existing values.',
+                        description: 'Whether to enable or disable overwriting existing values',
                     },
                 ],
             },
@@ -320,14 +320,14 @@ export const globalFieldFields: INodeProperties[] = [
                 bSetMultiFields: [false],
             },
         },
-        description: 'The value to set for this field.',
+        description: 'The value to set for this field',
     },
     {
         displayName: 'Do Triggers',
         name: 'bDoTriggers',
         type: 'boolean',
         default: false,
-        required: false,
+
         displayOptions: {
             show: {
                 operation: ['setValue'],
@@ -335,14 +335,14 @@ export const globalFieldFields: INodeProperties[] = [
                 bSetMultiFields: [false],
             },
         },
-        description: 'If false, no automatic process will be triggered which normally listens to a value change.',
+        description: 'Whether an automatic process, which normally listens to a value change, should be triggered',
     },
     {
         displayName: 'Overwrite',
         name: 'bOverwrite',
         type: 'boolean',
         default: false,
-        required: false,
+
         displayOptions: {
             show: {
                 operation: ['setValue'],
@@ -350,7 +350,7 @@ export const globalFieldFields: INodeProperties[] = [
                 bSetMultiFields: [false],
             },
         },
-        description: 'If false, an already present value won’t be overwritten.',
+        description: 'Whether an already present value should be overwritten',
     },
     {
         displayName: 'Additional Fields',
@@ -367,25 +367,25 @@ export const globalFieldFields: INodeProperties[] = [
         },
         options: [
             {
-                displayName: 'Search string',
+                displayName: 'Search String',
                 name: 'globalFieldSearchString',
                 type: 'string',
                 default: '',
-                description: 'This parameter is used to specify the text you want to search for within the name fields.',
+                description: 'This parameter is used to specify the text you want to search for within the name fields',
             },
             {
-                displayName: 'Page size',
+                displayName: 'Page Size',
                 name: 'globalFieldPageSize',
                 type: 'number',
                 default: '',
-                description: 'This parameter defines the number of results to display per page.',
+                description: 'This parameter defines the number of results to display per page',
             },
             {
-                displayName: 'Page number',
+                displayName: 'Page Number',
                 name: 'globalFieldPageNum',
                 type: 'number',
                 default: '',
-                description: 'This parameter is used to indicate the page number you want to retrieve in the result set.',
+                description: 'This parameter is used to indicate the page number you want to retrieve in the result set',
             },
         ],
     },

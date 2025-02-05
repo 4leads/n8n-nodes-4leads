@@ -15,17 +15,17 @@ export const optInCasesOperations: INodeProperties[] = [
             {
                 name: 'Get',
                 value: 'get',
-                action: 'List opt-in cases',
+                action: 'List opt in cases',
             },
             {
                 name: 'Grant',
                 value: 'grant',
-                action: 'Grant opt-in-case',
+                action: 'Grant opt in case',
             },
             {
                 name: 'Revoke',
                 value: 'revoke',
-                action: 'Revoke opt-in-case',
+                action: 'Revoke opt in case',
             }
         ],
         default: 'get',
@@ -40,7 +40,7 @@ export const optInCasesFields: INodeProperties[] = [
         required: true,
         default: { mode: 'list', value: '' },
         placeholder: 'Select a opt-in-case...',
-        description: 'Select a opt-in-case...',
+        description: 'Select a opt-in-case',
         displayOptions: {
             show: {
                 resource: ['optInCases'],
@@ -81,7 +81,7 @@ export const optInCasesFields: INodeProperties[] = [
         required: true,
         default: { mode: 'list', value: '' },
         placeholder: 'Select a opt-in-case...',
-        description: 'Select a opt-in-case...',
+        description: 'Select a opt-in-case',
         displayOptions: {
             show: {
                 resource: ['optInCases'],
@@ -123,7 +123,7 @@ export const optInCasesFields: INodeProperties[] = [
         required: true,
         default: { mode: 'id', value: '' },
         placeholder: 'Select a contact...',
-        description: 'Select a contact...',
+        description: 'Select a contact',
         displayOptions: {
             show: {
                 resource: ['optInCases'],
@@ -158,7 +158,7 @@ export const optInCasesFields: INodeProperties[] = [
         ],
     },
     {
-        displayName: 'Return everything',
+        displayName: 'Return Everything',
         name: 'bReturnAll',
         type: 'boolean',
         displayOptions: {
@@ -168,7 +168,7 @@ export const optInCasesFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Enable this option to return everything.',
+        description: 'Whether everything should be returned',
     },
     {
         displayName: 'Additional Fields',
@@ -189,21 +189,21 @@ export const optInCasesFields: INodeProperties[] = [
         },
         options: [
             {
-                displayName: 'Search string',
+                displayName: 'Search String',
                 name: 'optInCaseSearchString',
                 type: 'string',
                 default: '',
                 description: 'This parameter is used to specify the text you want to search for within the name fields. For example, if you\'re looking for names containing "@muster.de", you would enter this value in the searchString parameter.',
             },
             {
-                displayName: 'Page size',
+                displayName: 'Page Size',
                 name: 'optInCasePageSize',
                 type: 'string',
                 default: '',
                 description: 'This parameter defines the number of results to display per page. You can specify values like 5, 10, 20, 50, or 200, depending on how many results you want to be shown per page in the response.',
             },
             {
-                displayName: 'Page number',
+                displayName: 'Page Number',
                 name: 'optInCasePageNum',
                 type: 'string',
                 default: '',

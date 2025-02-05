@@ -15,7 +15,7 @@ export const campaignOperations: INodeProperties[] = [
             {
                 name: 'Start',
                 value: 'start',
-                action: 'Start a Campaign',
+                action: 'Start a campaign',
             },
         ],
         default: 'start',
@@ -30,7 +30,7 @@ export const campaignFields: INodeProperties[] = [
         required: true,
         default: { mode: 'list', value: '' },
         placeholder: 'Select a campaign...',
-        description: 'Select a campaign...',
+        description: 'Select a campaign',
         displayOptions: {
             show: {
                 resource: ['campaign'],
@@ -71,7 +71,7 @@ export const campaignFields: INodeProperties[] = [
         required: true,
         default: { mode: 'id', value: '' },
         placeholder: 'Select a contact...',
-        description: 'Select a contact...',
+        description: 'Select a contact',
         displayOptions: {
             show: {
                 resource: ['campaign'],

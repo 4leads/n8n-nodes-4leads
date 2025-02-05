@@ -4,8 +4,8 @@ import { getActionList } from '../GenericFunctions';
 
 export class FleadsTrigger implements INodeType {
     description: INodeTypeDescription = {
-        displayName: '4leads trigger',
-        name: 'FleadsTrigger',
+        displayName: '4leads trigger Trigger',
+        name: 'fleadsTrigger',
         icon: 'file:../fleads.svg',
         group: ['trigger'],
         version: 1,
@@ -14,7 +14,7 @@ export class FleadsTrigger implements INodeType {
         defaults: {
             name: '4leads trigger',
         },
-        inputs: [],
+        inputs: [NodeConnectionType.Main],
         outputs: [NodeConnectionType.Main],
         credentials: [
             {
@@ -29,21 +29,21 @@ export class FleadsTrigger implements INodeType {
                 name: 'triggerOn',
                 type: 'options',
                 required: true,
-                default: '',
+                default: 'eventCampaign',
                 options: [
                     {
-                        name: '4leads campaign',
+                        name: '4leads Campaign',
                         value: 'eventCampaign',
                     },
                 ],
             },
             {
-                displayName: 'Select an automation',
+                displayName: 'Select an Automation',
                 name: 'automationId',
                 type: 'resourceLocator',
                 default: { mode: 'list', value: '' },
                 required: true,
-                description: 'Select your 4leads automation.',
+                description: 'Select your 4leads automation',
                 modes: [
                     {
                         displayName: 'Automations',

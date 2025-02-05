@@ -15,22 +15,22 @@ export const optinOperations: INodeProperties[] = [
             {
                 name: 'Delete',
                 value: 'delete',
-                action: 'Delete a Opt-in',
+                action: 'Delete a opt in',
             },
             {
                 name: 'Get',
                 value: 'get',
-                action: 'List Opt-ins',
+                action: 'List opt ins',
             },
             {
                 name: 'Send',
                 value: 'send',
-                action: 'Send a Opt-in to Contact',
+                action: 'Send a opt in to contact',
             },
             {
-                name: 'Opt-out',
+                name: 'Opt-Out',
                 value: 'optout',
-                action: 'Opt-out a contact globally',
+                action: 'Opt out a contact globally',
             }
         ],
         default: 'get',
@@ -39,7 +39,7 @@ export const optinOperations: INodeProperties[] = [
 
 export const optinFields: INodeProperties[] = [
     {
-        displayName: 'Return everything',
+        displayName: 'Return Everything',
         name: 'bReturnAll',
         type: 'boolean',
         displayOptions: {
@@ -49,16 +49,16 @@ export const optinFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Enable this option to return everything.',
+        description: 'Whether everything should be returned',
     },
     {
-		displayName: 'Opt-in',
+		displayName: 'Opt-In',
 		name: 'optinId',
 		type: 'resourceLocator',
         required: true,
 		default: { mode: 'list', value: '' },
 		placeholder: 'Select a opt-in...',
-		description: 'Select a opt-in...',
+		description: 'Select a opt-in',
         displayOptions: {
             show: {
                 resource: ['optin'],
@@ -94,13 +94,13 @@ export const optinFields: INodeProperties[] = [
 		],
 	},
     {
-		displayName: 'Opt-in',
+		displayName: 'Opt-In',
 		name: 'optinId',
 		type: 'resourceLocator',
         required: true,
 		default: { mode: 'list', value: '' },
 		placeholder: 'Select a opt-in...',
-		description: 'Select a opt-in...',
+		description: 'Select a opt-in',
         displayOptions: {
             show: {
                 resource: ['optin'],
@@ -140,7 +140,7 @@ export const optinFields: INodeProperties[] = [
         type: 'resourceLocator',
         default: { mode: 'id', value: '' },
         placeholder: 'Select a contact...',
-        description: 'Select a contact...',
+        description: 'Select a contact',
         displayOptions: {
             show: {
                 resource: ['optin'],
@@ -193,21 +193,21 @@ export const optinFields: INodeProperties[] = [
         },
         options: [
             {
-                displayName: 'Search string',
+                displayName: 'Search String',
                 name: 'optinSearchString',
                 type: 'string',
                 default: '',
                 description: 'This parameter is used to specify the text you want to search for within the name fields. For example, if you\'re looking for names containing "@muster.de", you would enter this value in the searchString parameter.',
             },
             {
-                displayName: 'Page size',
+                displayName: 'Page Size',
                 name: 'optinPageSize',
                 type: 'number',
                 default: '',
                 description: 'This parameter defines the number of results to display per page. You can specify values like 5, 10, 20, 50, or 200, depending on how many results you want to be shown per page in the response.',
             },
             {
-                displayName: 'Page number',
+                displayName: 'Page Number',
                 name: 'optinPageNum',
                 type: 'number',
                 default: '',
