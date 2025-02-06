@@ -10,6 +10,13 @@ export class FleadsApi implements ICredentialType {
 	documentationUrl = 'https://4leadsv1.docs.apiary.io/#introduction/getting-started';
 	properties: INodeProperties[] = [
 		{
+			displayName: 'API base URL',
+			name: 'apiBaseUrl',
+			type: 'string',
+			default: 'https://api.4leads.net/v1/',
+			placeholder: 'https://api.4leads.net/v1/',
+		},
+		{
 			displayName: 'API Key',
 			name: 'apiKey',
 			type: 'string',

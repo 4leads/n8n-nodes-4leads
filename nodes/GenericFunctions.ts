@@ -9,6 +9,24 @@ export async function fourLeadsApiRequest(
     uri?: string,
     option: IDataObject = {}
 ): Promise<any> {
+    const credentials = await this.getCredentials('fleadsApi')
+
+    if (credentials === undefined) {
+        throw new NodeOperationError(this.getNode(), 'No credentials found.');
+    }
+
+    const apiBaseUrl = credentials.apiBaseUrl as string;
+    const apiKey = credentials.apiKey as string;
+
+    if (apiBaseUrl === undefined) {
+        throw new NodeOperationError(this.getNode(), 'No API base url found.');
+    }
+
+    if (apiKey === undefined) {
+        throw new NodeOperationError(this.getNode(), 'No API key found.');
+    }
+
+
     let options: IRequestOptions = {
         headers: {
             Accept: 'application/json',
@@ -17,7 +35,7 @@ export async function fourLeadsApiRequest(
         method,
         body,
         qs,
-        uri: uri || `https://api.4leads.eu/v1/${endpoint}`,
+        uri: uri || `${apiBaseUrl}${endpoint}`,
         json: true,
     };
 
@@ -26,17 +44,11 @@ export async function fourLeadsApiRequest(
     if (Object.keys(body).length === 0) {
         delete options.body;
     }
-    
+
     // Make request
     let responseData: IDataObject | undefined;
 
     try {
-        const credentials = await this.getCredentials('fleadsApi');
-
-        if (credentials === undefined) {
-            throw new NodeOperationError(this.getNode(), 'No credentials found.');
-        }
-
         options.headers = {
             ...options.headers,
             Authorization: `Bearer ${credentials.apiKey}`,
