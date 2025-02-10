@@ -4,7 +4,7 @@ import { getActionList } from '../GenericFunctions';
 
 export class FleadsTrigger implements INodeType {
     description: INodeTypeDescription = {
-        displayName: '4leads trigger Trigger',
+        displayName: '4leads Trigger',
         name: 'fleadsTrigger',
         icon: 'file:../fleads.svg',
         group: ['trigger'],
