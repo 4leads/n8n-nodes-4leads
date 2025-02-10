@@ -12,7 +12,7 @@ export class FleadsTrigger implements INodeType {
         subtitle: '={{$parameter["triggerOn"]}}',
         description: 'Starts the workflow when 4leads events occur',
         defaults: {
-            name: '4leads trigger',
+            name: '4leads',
         },
         inputs: [],
         outputs: ['main'],

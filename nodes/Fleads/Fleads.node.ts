@@ -67,7 +67,7 @@ export class Fleads implements INodeType {
 						value: 'contact'
 					},
 					{
-						name: 'Global Field',
+						name: 'Field',
 						value: 'globalField'
 					},
 					{

@@ -15,22 +15,22 @@ export const optinOperations: INodeProperties[] = [
             {
                 name: 'Delete',
                 value: 'delete',
-                action: 'Delete a opt in',
+                action: 'Delete Opt-in-Process',
             },
             {
                 name: 'Get',
                 value: 'get',
-                action: 'List opt ins',
+                action: 'List Opt-in-Processes',
             },
             {
                 name: 'Send',
                 value: 'send',
-                action: 'Send a opt in to contact',
+                action: 'Start Opt-in-Process',
             },
             {
                 name: 'Opt-Out',
                 value: 'optout',
-                action: 'Opt out a contact globally',
+                action: 'Global Opt-Out',
             }
         ],
         default: 'get',
@@ -39,7 +39,7 @@ export const optinOperations: INodeProperties[] = [
 
 export const optinFields: INodeProperties[] = [
     {
-        displayName: 'Return Everything',
+        displayName: 'Search for multiple results',
         name: 'bReturnAll',
         type: 'boolean',
         displayOptions: {
@@ -49,7 +49,7 @@ export const optinFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Whether everything should be returned',
+        description: 'Whether to return a single object or a list of objects',
     },
     {
 		displayName: 'Opt-In',
@@ -134,6 +134,18 @@ export const optinFields: INodeProperties[] = [
 			},
 		],
 	},
+    {
+        displayName: 'The email of a contact can be used as an alternative ID',
+        name: 'notice',
+        type: 'notice',
+        default: '',
+        displayOptions: {
+            show: {
+                resource: ['optin'],
+                operation: ['send', 'optout'],
+            },
+        },
+    },
     {
         displayName: 'Contact',
         name: 'optinContactId',

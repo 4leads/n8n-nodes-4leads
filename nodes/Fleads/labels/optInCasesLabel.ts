@@ -15,17 +15,17 @@ export const optInCasesOperations: INodeProperties[] = [
             {
                 name: 'Get',
                 value: 'get',
-                action: 'List opt in cases',
+                action: 'List Opt-in-Cases',
             },
             {
                 name: 'Grant',
                 value: 'grant',
-                action: 'Grant opt in case',
+                action: 'Grant Opt-in-Case',
             },
             {
                 name: 'Revoke',
                 value: 'revoke',
-                action: 'Revoke opt in case',
+                action: 'Revoke Opt-in-Case',
             }
         ],
         default: 'get',
@@ -117,6 +117,18 @@ export const optInCasesFields: INodeProperties[] = [
         ],
     },
     {
+        displayName: 'The email of a contact can be used as an alternative ID',
+        name: 'notice',
+        type: 'notice',
+        default: '',
+        displayOptions: {
+            show: {
+                resource: ['optInCases'],
+                operation: ['grant', 'revoke'],
+            },
+        },
+    },
+    {
         displayName: 'Contact',
         name: 'OptInCaseContactId',
         type: 'resourceLocator',
@@ -145,20 +157,11 @@ export const optInCasesFields: INodeProperties[] = [
                 displayName: 'By ID',
                 name: 'id',
                 type: 'string',
-                validation: [
-                    {
-                        type: 'regex',
-                        properties: {
-                            regex: '^[0-9]*$',
-                            errorMessage: 'Not a valid contact ID',
-                        },
-                    },
-                ],
             },
         ],
     },
     {
-        displayName: 'Return Everything',
+        displayName: 'Search for multiple results',
         name: 'bReturnAll',
         type: 'boolean',
         displayOptions: {
@@ -168,7 +171,7 @@ export const optInCasesFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Whether everything should be returned',
+        description: 'Whether to return a single object or a list of objects',
     },
     {
         displayName: 'Additional Fields',

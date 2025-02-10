@@ -65,6 +65,30 @@ export const campaignFields: INodeProperties[] = [
         ],
     },
     {
+        displayName: 'The email of a contact can be used as an alternative ID',
+        name: 'notice',
+        type: 'notice',
+        default: '',
+        displayOptions: {
+            show: {
+                resource: ['campaign'],
+                operation: ['start'],
+            },
+        },
+    },
+    {
+        displayName: 'The email of a contact can be used as an alternative ID',
+        name: 'notice',
+        type: 'notice',
+        default: '',
+        displayOptions: {
+            show: {
+                resource: ['campaign'],
+                operation: ['start'],
+            },
+        },
+    },
+    {
         displayName: 'Contact',
         name: 'contactId',
         type: 'resourceLocator',
@@ -93,15 +117,6 @@ export const campaignFields: INodeProperties[] = [
                 displayName: 'By ID',
                 name: 'id',
                 type: 'string',
-                validation: [
-                    {
-                        type: 'regex',
-                        properties: {
-                            regex: '^[0-9]*$',
-                            errorMessage: 'Not a valid contact ID',
-                        },
-                    },
-                ],
             },
         ],
     },

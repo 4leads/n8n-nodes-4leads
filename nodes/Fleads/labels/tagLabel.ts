@@ -15,22 +15,22 @@ export const tagOperations: INodeProperties[] = [
 			{
 				name: 'Create',
 				value: 'create',
-				action: 'Create a new tag',
+				action: 'Create Tag',
 			},
 			{
 				name: 'Update',
 				value: 'update',
-				action: 'Update a tag',
+				action: 'Update Tag',
 			},
 			{
 				name: 'Delete',
 				value: 'delete',
-				action: 'Delete a tag',
+				action: 'Delete Tag',
 			},
 			{
 				name: 'Get',
 				value: 'get',
-				action: 'List tags',
+				action: 'List Tags',
 			},
 		],
 		default: 'create',
@@ -104,7 +104,7 @@ export const tagFields: INodeProperties[] = [
     //             tag: get
     // ----------------------------------------
     {
-        displayName: 'Return Everything',
+        displayName: 'Search for multiple results',
         name: 'bReturnAll',
         type: 'boolean',
         displayOptions: {
@@ -114,7 +114,7 @@ export const tagFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Whether everything should be returned',
+        description: 'Whether to return a single object or a list of objects',
     },
 	{
 		displayName: 'Tag',

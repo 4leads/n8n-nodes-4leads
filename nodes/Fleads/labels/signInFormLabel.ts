@@ -15,22 +15,22 @@ export const signInFormOperations: INodeProperties[] = [
             {
                 name: 'Get',
                 value: 'get',
-                action: 'List sign in forms',
+                action: 'List Forms',
             },
             {
                 name: 'Delete',
                 value: 'delete',
-                action: 'Delete sign in form',
+                action: 'Delete Form',
             },
             {
                 name: 'Start',
                 value: 'start',
-                action: 'Start sign in form',
+                action: 'Sign Contact to Form',
             },
             {
                 name: 'Stop',
                 value: 'stop',
-                action: 'Stop sign in form',
+                action: 'Stop Form',
             },
         ],
         default: 'get',
@@ -39,7 +39,7 @@ export const signInFormOperations: INodeProperties[] = [
 
 export const signInFormFields: INodeProperties[] = [
     {
-        displayName: 'Return Everything',
+        displayName: 'Search for multiple results',
         name: 'bReturnAll',
         type: 'boolean',
         displayOptions: {
@@ -49,7 +49,7 @@ export const signInFormFields: INodeProperties[] = [
             },
         },
         default: false,
-        description: 'Whether everything should be returned',
+        description: 'Whether to return a single object or a list of objects',
     },
     {
         displayName: 'Sign in Form',
@@ -176,6 +176,18 @@ export const signInFormFields: INodeProperties[] = [
         ],
     },
     {
+        displayName: 'The email of a contact can be used as an alternative ID',
+        name: 'notice',
+        type: 'notice',
+        default: '',
+        displayOptions: {
+            show: {
+                resource: ['signInForm'],
+                operation: ['start', 'stop'],
+            },
+        },
+    },
+    {
         displayName: 'Contact',
         name: 'signInFormContactId',
         type: 'resourceLocator',
@@ -204,15 +216,6 @@ export const signInFormFields: INodeProperties[] = [
                 displayName: 'By ID',
                 name: 'id',
                 type: 'string',
-                validation: [
-                    {
-                        type: 'regex',
-                        properties: {
-                            regex: '^[0-9]*$',
-                            errorMessage: 'Not a valid contact ID',
-                        },
-                    },
-                ],
             },
         ],
     }
