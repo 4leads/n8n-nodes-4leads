@@ -117,7 +117,7 @@ export const optInCasesFields: INodeProperties[] = [
         ],
     },
     {
-        displayName: 'The email of a contact can be used as an alternative ID',
+        displayName: 'The email of a contact can be used as an alternative ID.',
         name: 'notice',
         type: 'notice',
         default: '',

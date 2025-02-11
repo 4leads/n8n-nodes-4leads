@@ -65,19 +65,7 @@ export const campaignFields: INodeProperties[] = [
         ],
     },
     {
-        displayName: 'The email of a contact can be used as an alternative ID',
-        name: 'notice',
-        type: 'notice',
-        default: '',
-        displayOptions: {
-            show: {
-                resource: ['campaign'],
-                operation: ['start'],
-            },
-        },
-    },
-    {
-        displayName: 'The email of a contact can be used as an alternative ID',
+        displayName: 'The email of a contact can be used as an alternative ID.',
         name: 'notice',
         type: 'notice',
         default: '',

@@ -135,7 +135,7 @@ export const optinFields: INodeProperties[] = [
 		],
 	},
     {
-        displayName: 'The email of a contact can be used as an alternative ID',
+        displayName: 'The email of a contact can be used as an alternative ID.',
         name: 'notice',
         type: 'notice',
         default: '',
@@ -174,15 +174,6 @@ export const optinFields: INodeProperties[] = [
                 displayName: 'By ID',
                 name: 'id',
                 type: 'string',
-                validation: [
-                    {
-                        type: 'regex',
-                        properties: {
-                            regex: '^[0-9]*$',
-                            errorMessage: 'Not a valid contact ID',
-                        },
-                    },
-                ],
             },
         ],
     },

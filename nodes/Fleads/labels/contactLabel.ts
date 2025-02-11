@@ -382,7 +382,7 @@ export const contactFields: INodeProperties[] = [
     //        addATag, removeATag
     // ----------------------------------------
     {
-        displayName: 'The email of a contact can be used as an alternative ID',
+        displayName: 'The email of a contact can be used as an alternative ID.',
         name: 'notice',
         type: 'notice',
         default: '',
@@ -722,7 +722,7 @@ export const contactFields: INodeProperties[] = [
     //             contact: get
     // ----------------------------------------
     {
-        displayName: 'The email of a contact can be used as an alternative ID',
+        displayName: 'The email of a contact can be used as an alternative ID.',
         name: 'notice',
         type: 'notice',
         default: '',
@@ -997,7 +997,7 @@ export const contactFields: INodeProperties[] = [
         ],
     },
     {
-        displayName: 'The email of a contact can be used as an alternative ID',
+        displayName: 'The email of a contact can be used as an alternative ID.',
         name: 'notice',
         type: 'notice',
         default: '',

@@ -6,7 +6,7 @@ export class FleadsTrigger implements INodeType {
     description: INodeTypeDescription = {
         displayName: '4leads Trigger',
         name: 'fleadsTrigger',
-        icon: 'file:../fleads.svg',
+		icon: { light: 'file:../fleads.svg', dark: 'file:../fleads.svg' },
         group: ['trigger'],
         version: 1,
         subtitle: '={{$parameter["triggerOn"]}}',

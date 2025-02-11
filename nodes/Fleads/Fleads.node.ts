@@ -27,7 +27,7 @@ export class Fleads implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: '4leads',
 		name: 'fleads',
-		icon: 'file:../fleads.svg',
+		icon: { light: 'file:../fleads.svg', dark: 'file:../fleads.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
@@ -43,18 +43,10 @@ export class Fleads implements INodeType {
 				required: true,
 			},
 		],
-		requestDefaults: {
-			baseURL: 'https://api.4leads.eu',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-		},
 		properties: [
 			{
 				displayName: 'Resource',
 				name: 'resource',
-				required: true,
 				noDataExpression: true,
 				type: 'options',
 				options: [
