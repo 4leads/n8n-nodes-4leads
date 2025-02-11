@@ -27,7 +27,7 @@ export class Fleads implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: '4leads',
 		name: 'fleads',
-		icon: { light: 'file:../fleads.svg', dark: 'file:../fleads.svg' },
+		icon: { light: 'file:../fleads_w.svg', dark: 'file:../fleads_d.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
