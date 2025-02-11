@@ -15,4 +15,4 @@ You need a 4leads account with API feature enabled to use this node.
 
 ## License
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+[MIT](https://github.com/4leads/n8n-nodes-4leads/blob/main/LICENSE)
