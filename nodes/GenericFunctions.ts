@@ -47,7 +47,7 @@ export async function fourLeadsApiRequest(
 
     // Make request
     let responseData: IDataObject | undefined;
-    console.log(options)
+
     try {
         options.headers = {
             ...options.headers,
@@ -55,7 +55,6 @@ export async function fourLeadsApiRequest(
         };
 
         responseData = await this.helpers.request(options);
-        console.log(responseData)
 
     } catch (error) {
         throw new NodeApiError(this.getNode(), error);
